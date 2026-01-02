@@ -156,15 +156,16 @@
 
   <script>
     const icons = [
-      { key: 'Standard', label: 'Standard' },
       { key: 'WesternEurope', label: 'Western Europe' },
       { key: 'CentralEurope', label: 'Central Europe' },
       { key: 'SouthernEurope', label: 'Southern Europe' },
       { key: 'EasternEurope', label: 'Eastern Europe' },
+      { key: 'EasternEuropeEurasia', label: 'Eastern Europe & Eurasia' },
       { key: 'MiddleEast', label: 'Middle East' },
       { key: 'PersianRegion', label: 'Persian Region' },
+      { key: 'NorthAmerica', label: 'North America' },
       { key: 'LatinAmerica', label: 'Latin America' },
-      { key: 'LatinAmericaAlt', label: 'Latin America (Alt)' },
+      { key: 'LatinAmericaPT', label: 'Latin America (PT)' },
       { key: 'EastAfrica', label: 'East Africa' },
       { key: 'EastAfricaAlt', label: 'East Africa (Alt)' },
       { key: 'NorthEastAfrica', label: 'North East Africa' },
@@ -181,7 +182,7 @@
     const chatbotId = 'Nq3vVo-7E8qgwlPRzAn9g';
     const baseIconUrl = 'https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_';
 
-    let selectedIcon = 'Standard';
+    let selectedIcon = 'WesternEurope';
 
     function getIconUrl(key) {
       return `${baseIconUrl}${key}.png`;

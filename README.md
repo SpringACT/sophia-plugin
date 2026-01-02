@@ -222,15 +222,16 @@ Use our **[Code Generator](https://springact.github.io/sophia-plugin/generator.h
 
 | Region | Icon URL (copy this) |
 |--------|----------------------|
-| Standard | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_Standard.png` |
 | Western Europe | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_WesternEurope.png` |
 | Central Europe | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_CentralEurope.png` |
 | Southern Europe | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_SouthernEurope.png` |
 | Eastern Europe | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_EasternEurope.png` |
+| Eastern Europe & Eurasia | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_EasternEuropeEurasia.png` |
 | Middle East | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_MiddleEast.png` |
 | Persian Region | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_PersianRegion.png` |
+| North America | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_NorthAmerica.png` |
 | Latin America | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_LatinAmerica.png` |
-| Latin America (Alt) | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_LatinAmericaAlt.png` |
+| Latin America (Portuguese) | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_LatinAmericaPT.png` |
 | East Africa | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_EastAfrica.png` |
 | East Africa (Alt) | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_EastAfricaAlt.png` |
 | North East Africa | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_NorthEastAfrica.png` |
