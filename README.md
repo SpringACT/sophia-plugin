@@ -45,7 +45,6 @@ WordPress is commonly used by NGOs, government agencies, and humanitarian organi
 
 | Setting | Description |
 |---------|-------------|
-| **Chatbot ID** | The Sophia Chatbot ID (pre-filled with default) |
 | **Chat Icon** | Choose from 21 regional Sophia avatars or use a custom icon |
 | **Show Chat On** | All pages, homepage only, specific pages, or exclude pages |
 
@@ -56,15 +55,39 @@ WordPress is commonly used by NGOs, government agencies, and humanitarian organi
 For any website (including UN systems, custom government portals, or static sites), add this code before the closing `</body>` tag:
 
 ```html
-<!-- Chatbase Widget -->
-<script>
-  window.embeddedChatbotConfig = {
-    chatbotId: "Nq3vVo-7E8qgwlPRzAn9g",
-    domain: "www.chatbase.co"
+<!-- Sophia Chat Widget -->
+<style>
+  #sophia-chat-bubble {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 999999;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #65758e;
+    background-image: url('ICON_URL_HERE');
+    background-size: cover;
+    background-position: center;
+    border: none;
+    padding: 0;
   }
-</script>
-<script src="https://www.chatbase.co/embed.min.js" chatbotId="Nq3vVo-7E8qgwlPRzAn9g" domain="www.chatbase.co" defer></script>
+  #sophia-chat-bubble:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+</style>
+<button id="sophia-chat-bubble"
+        onclick="window.open('https://sophia.chat/secure-chat', 'SophiaChat', 'width=400,height=600,scrollbars=yes,resizable=yes')"
+        aria-label="Chat with Sophia"
+        title="Chat with Sophia">
+</button>
 ```
+
+Replace `ICON_URL_HERE` with your chosen Sophia icon URL from the table below.
 
 ---
 
@@ -189,34 +212,9 @@ Add to your theme's `main_template`:
 
 Use our **[Code Generator](https://springact.github.io/sophia-plugin/generator.html)** to select your Sophia icon and get ready-to-use code.
 
-### Manual Way: Copy & Paste
+### Manual Way
 
-1. Pick an icon from the table below
-2. Copy the complete code snippet
-3. Replace `ICON_URL_HERE` with your chosen icon URL
-
-```html
-<!-- Chatbase Widget with Custom Sophia Icon -->
-<script>
-  window.embeddedChatbotConfig = {
-    chatbotId: "Nq3vVo-7E8qgwlPRzAn9g",
-    domain: "www.chatbase.co"
-  }
-</script>
-<script src="https://www.chatbase.co/embed.min.js" chatbotId="Nq3vVo-7E8qgwlPRzAn9g" domain="www.chatbase.co" defer></script>
-<style>
-  #chatbase-bubble-button {
-    background-image: url('ICON_URL_HERE') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    border-radius: 50% !important;
-  }
-  #chatbase-bubble-button svg,
-  #chatbase-bubble-button img {
-    display: none !important;
-  }
-</style>
-```
+Pick an icon URL from the table below and use it in the [Direct HTML/JavaScript](#direct-htmljavascript) code above.
 
 ### Available Sophia Icons
 

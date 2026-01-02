@@ -17,13 +17,13 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('SOPHIA_CHAT_VERSION', '2.0.0');
+define('SOPHIA_CHAT_VERSION', '2.1.0');
 define('SOPHIA_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SOPHIA_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('SOPHIA_CHAT_DEFAULT_AGENT_ID', 'Nq3vVo-7E8qgwlPRzAn9g');
+define('SOPHIA_CHAT_URL', 'https://sophia.chat/secure-chat');
 
 /**
- * Add the Chatbase chat widget to the footer
+ * Add the Sophia Chat bubble to the footer
  */
 function sophia_chat_add_widget() {
     // Check if we should display on this page
@@ -31,39 +31,43 @@ function sophia_chat_add_widget() {
         return;
     }
 
-    $chatbot_id = get_option('sophia_chat_chatbot_id', SOPHIA_CHAT_DEFAULT_AGENT_ID);
-
-    // Don't output anything if no chatbot ID is set
-    if (empty($chatbot_id)) {
-        return;
-    }
-
     $icon_url = sophia_chat_get_icon_url();
+    $chat_url = SOPHIA_CHAT_URL;
     ?>
-    <!-- Chatbase Widget -->
-    <script>
-      window.embeddedChatbotConfig = {
-        chatbotId: "<?php echo esc_js($chatbot_id); ?>",
-        domain: "www.chatbase.co"
-      }
-    </script>
-    <script src="https://www.chatbase.co/embed.min.js" chatbotId="<?php echo esc_attr($chatbot_id); ?>" domain="www.chatbase.co" defer></script>
-
-    <?php if ($icon_url) : ?>
-    <!-- Custom Sophia Icon Override -->
+    <!-- Sophia Chat Widget -->
     <style>
-      #chatbase-bubble-button {
-        background-image: url('<?php echo esc_url($icon_url); ?>') !important;
-        background-size: cover !important;
-        background-position: center !important;
-        border-radius: 50% !important;
+      #sophia-chat-bubble {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 999999;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background-color: #65758e;
+        background-size: cover;
+        background-position: center;
+        border: none;
+        padding: 0;
       }
-      #chatbase-bubble-button svg,
-      #chatbase-bubble-button img {
-        display: none !important;
+      #sophia-chat-bubble:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
       }
+      <?php if ($icon_url) : ?>
+      #sophia-chat-bubble {
+        background-image: url('<?php echo esc_url($icon_url); ?>');
+      }
+      <?php endif; ?>
     </style>
-    <?php endif; ?>
+    <button id="sophia-chat-bubble"
+            onclick="window.open('<?php echo esc_url($chat_url); ?>', 'SophiaChat', 'width=400,height=600,scrollbars=yes,resizable=yes')"
+            aria-label="<?php esc_attr_e('Chat with Sophia', 'sophia-chat'); ?>"
+            title="<?php esc_attr_e('Chat with Sophia', 'sophia-chat'); ?>">
+    </button>
     <?php
 }
 add_action('wp_footer', 'sophia_chat_add_widget');
@@ -179,7 +183,6 @@ add_action('admin_menu', 'sophia_chat_menu');
  * Register plugin settings
  */
 function sophia_chat_register_settings() {
-    register_setting('sophia_chat_options', 'sophia_chat_chatbot_id', 'sanitize_text_field');
     register_setting('sophia_chat_options', 'sophia_chat_icon', 'sanitize_text_field');
     register_setting('sophia_chat_options', 'sophia_chat_custom_icon_url', 'esc_url_raw');
     register_setting('sophia_chat_options', 'sophia_chat_visibility', 'sanitize_text_field');
@@ -211,22 +214,6 @@ function sophia_chat_settings_page() {
             <?php settings_fields('sophia_chat_options'); ?>
 
             <table class="form-table">
-                <!-- Chatbot ID -->
-                <tr>
-                    <th scope="row">
-                        <label for="sophia_chat_chatbot_id"><?php _e('Chatbot ID', 'sophia-chat'); ?></label>
-                    </th>
-                    <td>
-                        <input type="text"
-                               id="sophia_chat_chatbot_id"
-                               name="sophia_chat_chatbot_id"
-                               value="<?php echo esc_attr(get_option('sophia_chat_chatbot_id', SOPHIA_CHAT_DEFAULT_AGENT_ID)); ?>"
-                               class="regular-text"
-                               placeholder="<?php echo esc_attr(SOPHIA_CHAT_DEFAULT_AGENT_ID); ?>" />
-                        <p class="description"><?php _e('The Sophia Chatbot ID. Leave as default unless instructed otherwise by SpringACT.', 'sophia-chat'); ?></p>
-                    </td>
-                </tr>
-
                 <!-- Icon Selection -->
                 <tr>
                     <th scope="row"><?php _e('Chat Icon', 'sophia-chat'); ?></th>

@@ -179,7 +179,7 @@
       { key: 'GenderInclusive', label: 'Gender Inclusive' }
     ];
 
-    const chatbotId = 'Nq3vVo-7E8qgwlPRzAn9g';
+    const chatUrl = 'https://sophia.chat/secure-chat';
     const baseIconUrl = 'https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_';
 
     let selectedIcon = 'WesternEurope';
@@ -191,25 +191,35 @@
     function generateCode(iconKey) {
       const iconUrl = getIconUrl(iconKey);
       return `<!-- Sophia Chat Widget -->
-<script>
-  window.embeddedChatbotConfig = {
-    chatbotId: "${chatbotId}",
-    domain: "www.chatbase.co"
-  }
-<\/script>
-<script src="https://www.chatbase.co/embed.min.js" chatbotId="${chatbotId}" domain="www.chatbase.co" defer><\/script>
 <style>
-  #chatbase-bubble-button {
-    background-image: url('${iconUrl}') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    border-radius: 50% !important;
+  #sophia-chat-bubble {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 999999;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #65758e;
+    background-image: url('${iconUrl}');
+    background-size: cover;
+    background-position: center;
+    border: none;
+    padding: 0;
   }
-  #chatbase-bubble-button svg,
-  #chatbase-bubble-button img {
-    display: none !important;
+  #sophia-chat-bubble:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   }
-</style>`;
+</style>
+<button id="sophia-chat-bubble"
+        onclick="window.open('${chatUrl}', 'SophiaChat', 'width=400,height=600,scrollbars=yes,resizable=yes')"
+        aria-label="Chat with Sophia"
+        title="Chat with Sophia">
+</button>`;
     }
 
     function selectIcon(key) {

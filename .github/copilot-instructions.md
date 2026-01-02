@@ -1,18 +1,18 @@
 # Sophia Chat Plugin - AI Coding Assistant Instructions
 
 ## Project Overview
-Sophia Chat is a WordPress plugin that integrates Chatbase chatbot for domestic violence support. The plugin embeds a chat widget on WordPress sites with region/language-specific avatar customization (via CSS injection) and granular page visibility controls.
+Sophia Chat is a WordPress plugin that adds a chat bubble linking to sophia.chat/secure-chat for domestic violence support. The plugin displays a customizable regional avatar that opens the Sophia Chat interface in a popup window.
 
 ## Architecture & Key Components
 
 ### Plugin Structure
 - **[sophia-chat.php](../sophia-chat.php)** - Single monolithic file containing all plugin logic
-  - Hooks into `wp_footer` to inject Chatbase JavaScript embed and custom CSS
+  - Hooks into `wp_footer` to inject chat bubble button and CSS
   - Admin settings page registered via WordPress Settings API
   - 7 main functions handling widget rendering, settings, and icon management
 
 ### Core Hooks & Filters
-- `wp_footer` - Renders the Chatbase embed script and icon override CSS
+- `wp_footer` - Renders the chat bubble button that opens sophia.chat/secure-chat
 - `admin_menu` - Registers settings page under Settings menu
 - `admin_init` - Registers all settings with sanitization callbacks
 - `admin_enqueue_scripts` - Loads admin CSS only on settings page
@@ -20,7 +20,6 @@ Sophia Chat is a WordPress plugin that integrates Chatbase chatbot for domestic 
 
 ### Configuration Model
 Plugin uses WordPress Options API (get_option/update_option) with these keys:
-- `sophia_chat_chatbot_id` - Chatbase chatbot identifier (default: `Nq3vVo-7E8qgwlPRzAn9g`)
 - `sophia_chat_icon` - Selected avatar key from 21 regional options
 - `sophia_chat_custom_icon_url` - Custom icon fallback (if icon='custom')
 - `sophia_chat_visibility` - Display strategy: `all`, `homepage`, `specific`, `exclude`
@@ -48,15 +47,17 @@ Plugin uses WordPress Options API (get_option/update_option) with these keys:
 - **Inclusive**: IndigenousContexts, GenderInclusive
 - **Default**: Standard
 
-Icons are applied via CSS injection that overrides the Chatbase bubble button:
+The chat bubble is a simple button element styled with CSS:
 ```css
-#chatbase-bubble-button {
-  background-image: url('icon-url') !important;
-  background-size: cover !important;
-}
-#chatbase-bubble-button svg,
-#chatbase-bubble-button img {
-  display: none !important;
+#sophia-chat-bubble {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-image: url('icon-url');
+  background-size: cover;
 }
 ```
 
@@ -69,21 +70,21 @@ Icons are applied via CSS injection that overrides the Chatbase bubble button:
 4. For conditional fields, use inline JavaScript in settings page (see custom icon/page ID patterns)
 
 ### Modifying Widget Output
-Edit the inline `<script>` and `<style>` blocks in `sophia_chat_add_widget()`:
-- Chatbase config via `window.embeddedChatbotConfig`
-- Icon override via injected CSS targeting `#chatbase-bubble-button`
+Edit the `<style>` and `<button>` in `sophia_chat_add_widget()`:
+- Button opens `https://sophia.chat/secure-chat` in a popup window
+- Icon set via CSS background-image on `#sophia-chat-bubble`
 
 ### Testing Locally
 WordPress plugins require:
 - Local WordPress installation
 - Plugin activated in admin
 - Settings configured in Settings > Sophia Chat
-- Browser dev tools to verify Chatbase widget loads and icon CSS applies
+- Click bubble to verify popup opens to sophia.chat/secure-chat
 
 ## Multi-Platform Integration
-Plugin provides generic JavaScript/CSS snippet for non-WordPress integration in [README.md](../README.md). Keep WordPress and HTML/JS versions in sync when updating Chatbase initialization logic.
+Plugin provides generic HTML/CSS snippet for non-WordPress integration in [README.md](../README.md). Keep WordPress and HTML versions in sync.
 
 ## External Dependencies
-- **Chatbase** - Third-party service (embed.min.js loaded from www.chatbase.co)
+- **sophia.chat** - Chat interface opens in popup window
 - **No npm/composer dependencies** - Pure PHP WordPress plugin
 - **jQuery** - WordPress core dependency (used only in settings page for form interactions)
