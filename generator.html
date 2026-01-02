@@ -65,9 +65,7 @@
       margin: 0 auto 8px;
     }
     .icon-option span {
-      font-size: 12px;
-      color: #666;
-      display: block;
+      display: none;
     }
     .code-output {
       background: #1e1e1e;
@@ -156,33 +154,33 @@
 
   <script>
     const icons = [
-      { key: 'WesternEurope', label: 'Western Europe' },
-      { key: 'CentralEurope', label: 'Central Europe' },
-      { key: 'SouthernEurope', label: 'Southern Europe' },
-      { key: 'EasternEurope', label: 'Eastern Europe' },
-      { key: 'EasternEuropeEurasia', label: 'Eastern Europe & Eurasia' },
-      { key: 'MiddleEast', label: 'Middle East' },
-      { key: 'PersianRegion', label: 'Persian Region' },
-      { key: 'NorthAmerica', label: 'North America' },
-      { key: 'LatinAmerica', label: 'Latin America' },
-      { key: 'LatinAmericaPT', label: 'Latin America (PT)' },
-      { key: 'EastAfrica', label: 'East Africa' },
-      { key: 'EastAfricaAlt', label: 'East Africa (Alt)' },
-      { key: 'NorthEastAfrica', label: 'North East Africa' },
-      { key: 'WestAfrica', label: 'West Africa' },
-      { key: 'EastAsia', label: 'East Asia' },
-      { key: 'SouthAsia', label: 'South Asia' },
-      { key: 'SoutheastAsia', label: 'Southeast Asia' },
-      { key: 'AsiaPacific', label: 'Asia Pacific' },
-      { key: 'PacificIslands', label: 'Pacific Islands' },
-      { key: 'IndigenousContexts', label: 'Indigenous Contexts' },
-      { key: 'GenderInclusive', label: 'Gender Inclusive' }
+      { key: '1' },
+      { key: '2' },
+      { key: '3' },
+      { key: '4' },
+      { key: '5' },
+      { key: '6' },
+      { key: '7' },
+      { key: '8' },
+      { key: '9' },
+      { key: '10' },
+      { key: '11' },
+      { key: '12' },
+      { key: '13' },
+      { key: '14' },
+      { key: '15' },
+      { key: '16' },
+      { key: '17' },
+      { key: '18' },
+      { key: '19' },
+      { key: '20' },
+      { key: '21' }
     ];
 
     const chatUrl = 'https://sophia.chat/secure-chat';
     const baseIconUrl = 'https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_';
 
-    let selectedIcon = 'WesternEurope';
+    let selectedIcon = '1';
 
     function getIconUrl(key) {
       return `${baseIconUrl}${key}.png`;
@@ -251,7 +249,7 @@
       const div = document.createElement('div');
       div.className = 'icon-option' + (icon.key === selectedIcon ? ' selected' : '');
       div.dataset.key = icon.key;
-      div.innerHTML = `<img src="${getIconUrl(icon.key)}" alt="${icon.label}"><span>${icon.label}</span>`;
+      div.innerHTML = `<img src="${getIconUrl(icon.key)}" alt="Sophia ${icon.key}">`;
       div.onclick = () => selectIcon(icon.key);
       grid.appendChild(div);
     });

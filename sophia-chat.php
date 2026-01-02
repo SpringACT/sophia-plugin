@@ -118,27 +118,27 @@ function sophia_chat_should_display() {
  */
 function sophia_chat_get_icons() {
     return array(
-        'WesternEurope'         => __('Western Europe', 'sophia-chat'),
-        'CentralEurope'         => __('Central Europe', 'sophia-chat'),
-        'SouthernEurope'        => __('Southern Europe', 'sophia-chat'),
-        'EasternEurope'         => __('Eastern Europe', 'sophia-chat'),
-        'EasternEuropeEurasia'  => __('Eastern Europe & Eurasia', 'sophia-chat'),
-        'MiddleEast'            => __('Middle East', 'sophia-chat'),
-        'PersianRegion'         => __('Persian Region', 'sophia-chat'),
-        'NorthAmerica'          => __('North America', 'sophia-chat'),
-        'LatinAmerica'          => __('Latin America', 'sophia-chat'),
-        'LatinAmericaPT'        => __('Latin America (Portuguese)', 'sophia-chat'),
-        'EastAfrica'            => __('East Africa', 'sophia-chat'),
-        'EastAfricaAlt'         => __('East Africa (Alt)', 'sophia-chat'),
-        'NorthEastAfrica'       => __('North East Africa', 'sophia-chat'),
-        'WestAfrica'            => __('West Africa', 'sophia-chat'),
-        'EastAsia'              => __('East Asia', 'sophia-chat'),
-        'SouthAsia'             => __('South Asia', 'sophia-chat'),
-        'SoutheastAsia'         => __('Southeast Asia', 'sophia-chat'),
-        'AsiaPacific'           => __('Asia Pacific', 'sophia-chat'),
-        'PacificIslands'        => __('Pacific Islands', 'sophia-chat'),
-        'IndigenousContexts'    => __('Indigenous Contexts', 'sophia-chat'),
-        'GenderInclusive'       => __('Gender Inclusive', 'sophia-chat'),
+        '1'  => __('Sophia 1', 'sophia-chat'),
+        '2'  => __('Sophia 2', 'sophia-chat'),
+        '3'  => __('Sophia 3', 'sophia-chat'),
+        '4'  => __('Sophia 4', 'sophia-chat'),
+        '5'  => __('Sophia 5', 'sophia-chat'),
+        '6'  => __('Sophia 6', 'sophia-chat'),
+        '7'  => __('Sophia 7', 'sophia-chat'),
+        '8'  => __('Sophia 8', 'sophia-chat'),
+        '9'  => __('Sophia 9', 'sophia-chat'),
+        '10' => __('Sophia 10', 'sophia-chat'),
+        '11' => __('Sophia 11', 'sophia-chat'),
+        '12' => __('Sophia 12', 'sophia-chat'),
+        '13' => __('Sophia 13', 'sophia-chat'),
+        '14' => __('Sophia 14', 'sophia-chat'),
+        '15' => __('Sophia 15', 'sophia-chat'),
+        '16' => __('Sophia 16', 'sophia-chat'),
+        '17' => __('Sophia 17', 'sophia-chat'),
+        '18' => __('Sophia 18', 'sophia-chat'),
+        '19' => __('Sophia 19', 'sophia-chat'),
+        '20' => __('Sophia 20', 'sophia-chat'),
+        '21' => __('Sophia 21', 'sophia-chat'),
     );
 }
 
@@ -146,7 +146,7 @@ function sophia_chat_get_icons() {
  * Get the selected icon URL
  */
 function sophia_chat_get_icon_url() {
-    $icon = get_option('sophia_chat_icon', 'WesternEurope');
+    $icon = get_option('sophia_chat_icon', '1');
 
     if ($icon === 'none') {
         return '';
@@ -162,7 +162,7 @@ function sophia_chat_get_icon_url() {
         return SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/Sophias/Sophia_' . $icon . '.png';
     }
 
-    return SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/Sophias/Sophia_WesternEurope.png';
+    return SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/Sophias/Sophia_1.png';
 }
 
 /**
@@ -220,7 +220,7 @@ function sophia_chat_settings_page() {
                     <td>
                         <fieldset>
                             <?php
-                            $current_icon = get_option('sophia_chat_icon', 'WesternEurope');
+                            $current_icon = get_option('sophia_chat_icon', '1');
                             $icons = sophia_chat_get_icons();
                             ?>
 

@@ -45,7 +45,7 @@ WordPress is commonly used by NGOs, government agencies, and humanitarian organi
 
 | Setting | Description |
 |---------|-------------|
-| **Chat Icon** | Choose from 21 regional Sophia avatars or use a custom icon |
+| **Chat Icon** | Choose from 21 Sophia avatars or use a custom icon |
 | **Show Chat On** | All pages, homepage only, specific pages, or exclude pages |
 
 ---
@@ -218,29 +218,29 @@ Pick an icon URL from the table below and use it in the [Direct HTML/JavaScript]
 
 ### Available Sophia Icons
 
-| Region | Icon URL (copy this) |
-|--------|----------------------|
-| Western Europe | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_WesternEurope.png` |
-| Central Europe | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_CentralEurope.png` |
-| Southern Europe | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_SouthernEurope.png` |
-| Eastern Europe | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_EasternEurope.png` |
-| Eastern Europe & Eurasia | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_EasternEuropeEurasia.png` |
-| Middle East | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_MiddleEast.png` |
-| Persian Region | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_PersianRegion.png` |
-| North America | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_NorthAmerica.png` |
-| Latin America | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_LatinAmerica.png` |
-| Latin America (Portuguese) | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_LatinAmericaPT.png` |
-| East Africa | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_EastAfrica.png` |
-| East Africa (Alt) | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_EastAfricaAlt.png` |
-| North East Africa | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_NorthEastAfrica.png` |
-| West Africa | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_WestAfrica.png` |
-| East Asia | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_EastAsia.png` |
-| South Asia | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_SouthAsia.png` |
-| Southeast Asia | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_SoutheastAsia.png` |
-| Asia Pacific | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_AsiaPacific.png` |
-| Pacific Islands | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_PacificIslands.png` |
-| Indigenous Contexts | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_IndigenousContexts.png` |
-| Gender Inclusive | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_GenderInclusive.png` |
+| Icon | URL (copy this) |
+|------|-----------------|
+| 1 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_1.png` |
+| 2 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_2.png` |
+| 3 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_3.png` |
+| 4 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_4.png` |
+| 5 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_5.png` |
+| 6 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_6.png` |
+| 7 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_7.png` |
+| 8 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_8.png` |
+| 9 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_9.png` |
+| 10 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_10.png` |
+| 11 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_11.png` |
+| 12 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_12.png` |
+| 13 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_13.png` |
+| 14 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_14.png` |
+| 15 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_15.png` |
+| 16 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_16.png` |
+| 17 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_17.png` |
+| 18 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_18.png` |
+| 19 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_19.png` |
+| 20 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_20.png` |
+| 21 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_21.png` |
 
 ---
 
