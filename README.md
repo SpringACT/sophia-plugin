@@ -183,12 +183,20 @@ Add to your theme's `main_template`:
 
 ---
 
-## Custom Icon (Optional)
+## Choosing a Sophia Icon
 
-To use a custom Sophia avatar on non-WordPress sites, add CSS to override the chat bubble icon:
+### Easy Way: Code Generator
+
+Use our **[Code Generator](https://springact.github.io/sophia-plugin/generator.html)** to select your Sophia icon and get ready-to-use code.
+
+### Manual Way: Copy & Paste
+
+1. Pick an icon from the table below
+2. Copy the complete code snippet
+3. Replace `ICON_URL_HERE` with your chosen icon URL
 
 ```html
-<!-- Chatbase Widget -->
+<!-- Chatbase Widget with Custom Sophia Icon -->
 <script>
   window.embeddedChatbotConfig = {
     chatbotId: "Nq3vVo-7E8qgwlPRzAn9g",
@@ -196,11 +204,9 @@ To use a custom Sophia avatar on non-WordPress sites, add CSS to override the ch
   }
 </script>
 <script src="https://www.chatbase.co/embed.min.js" chatbotId="Nq3vVo-7E8qgwlPRzAn9g" domain="www.chatbase.co" defer></script>
-
-<!-- Custom Sophia Icon -->
 <style>
   #chatbase-bubble-button {
-    background-image: url('https://your-site.com/path/to/sophia-icon.png') !important;
+    background-image: url('ICON_URL_HERE') !important;
     background-size: cover !important;
     background-position: center !important;
     border-radius: 50% !important;
@@ -212,31 +218,30 @@ To use a custom Sophia avatar on non-WordPress sites, add CSS to override the ch
 </style>
 ```
 
-Recommended icon size: 200x200 pixels, PNG format.
-
 ### Available Sophia Icons
 
-You can use any of the regional Sophia icons from this repository:
-
-| Region | Icon URL |
-|--------|----------|
-| Western Europe | `assets/icons/Sophias/Sophia_WesternEurope.png` |
-| Central Europe | `assets/icons/Sophias/Sophia_CentralEurope.png` |
-| Southern Europe | `assets/icons/Sophias/Sophia_SouthernEurope.png` |
-| Eastern Europe | `assets/icons/Sophias/Sophia_EasternEurope.png` |
-| Middle East | `assets/icons/Sophias/Sophia_MiddleEast.png` |
-| Persian Region | `assets/icons/Sophias/Sophia_PersianRegion.png` |
-| Latin America | `assets/icons/Sophias/Sophia_LatinAmerica.png` |
-| East Africa | `assets/icons/Sophias/Sophia_EastAfrica.png` |
-| West Africa | `assets/icons/Sophias/Sophia_WestAfrica.png` |
-| East Asia | `assets/icons/Sophias/Sophia_EastAsia.png` |
-| South Asia | `assets/icons/Sophias/Sophia_SouthAsia.png` |
-| Southeast Asia | `assets/icons/Sophias/Sophia_SoutheastAsia.png` |
-| Asia Pacific | `assets/icons/Sophias/Sophia_AsiaPacific.png` |
-| Pacific Islands | `assets/icons/Sophias/Sophia_PacificIslands.png` |
-| Indigenous Contexts | `assets/icons/Sophias/Sophia_IndigenousContexts.png` |
-| Gender Inclusive | `assets/icons/Sophias/Sophia_GenderInclusive.png` |
-| Standard | `assets/icons/Sophias/Sophia_Standard.png` |
+| Region | Icon URL (copy this) |
+|--------|----------------------|
+| Standard | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_Standard.png` |
+| Western Europe | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_WesternEurope.png` |
+| Central Europe | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_CentralEurope.png` |
+| Southern Europe | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_SouthernEurope.png` |
+| Eastern Europe | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_EasternEurope.png` |
+| Middle East | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_MiddleEast.png` |
+| Persian Region | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_PersianRegion.png` |
+| Latin America | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_LatinAmerica.png` |
+| Latin America (Alt) | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_LatinAmericaAlt.png` |
+| East Africa | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_EastAfrica.png` |
+| East Africa (Alt) | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_EastAfricaAlt.png` |
+| North East Africa | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_NorthEastAfrica.png` |
+| West Africa | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_WestAfrica.png` |
+| East Asia | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_EastAsia.png` |
+| South Asia | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_SouthAsia.png` |
+| Southeast Asia | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_SoutheastAsia.png` |
+| Asia Pacific | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_AsiaPacific.png` |
+| Pacific Islands | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_PacificIslands.png` |
+| Indigenous Contexts | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_IndigenousContexts.png` |
+| Gender Inclusive | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_GenderInclusive.png` |
 
 ---
 
