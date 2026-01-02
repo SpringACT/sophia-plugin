@@ -103,10 +103,39 @@ function sophia_chat_should_display() {
 }
 
 /**
+ * Get available Sophia icons
+ */
+function sophia_chat_get_icons() {
+    return array(
+        'WesternEurope'         => __('Western Europe', 'sophia-chat'),
+        'CentralEurope'         => __('Central Europe', 'sophia-chat'),
+        'SouthernEurope'        => __('Southern Europe', 'sophia-chat'),
+        'EasternEurope'         => __('Eastern Europe', 'sophia-chat'),
+        'EasternEuropeEurasia'  => __('Eastern Europe & Eurasia', 'sophia-chat'),
+        'MiddleEast'            => __('Middle East', 'sophia-chat'),
+        'PersianRegion'         => __('Persian Region', 'sophia-chat'),
+        'NorthAmerica'          => __('North America', 'sophia-chat'),
+        'LatinAmerica'          => __('Latin America', 'sophia-chat'),
+        'LatinAmericaPT'        => __('Latin America (Portuguese)', 'sophia-chat'),
+        'EastAfrica'            => __('East Africa', 'sophia-chat'),
+        'EastAfricaAlt'         => __('East Africa (Alt)', 'sophia-chat'),
+        'NorthEastAfrica'       => __('North East Africa', 'sophia-chat'),
+        'WestAfrica'            => __('West Africa', 'sophia-chat'),
+        'EastAsia'              => __('East Asia', 'sophia-chat'),
+        'SouthAsia'             => __('South Asia', 'sophia-chat'),
+        'SoutheastAsia'         => __('Southeast Asia', 'sophia-chat'),
+        'AsiaPacific'           => __('Asia Pacific', 'sophia-chat'),
+        'PacificIslands'        => __('Pacific Islands', 'sophia-chat'),
+        'IndigenousContexts'    => __('Indigenous Contexts', 'sophia-chat'),
+        'GenderInclusive'       => __('Gender Inclusive', 'sophia-chat'),
+    );
+}
+
+/**
  * Get the selected icon URL
  */
 function sophia_chat_get_icon_url() {
-    $icon = get_option('sophia_chat_icon', 'default');
+    $icon = get_option('sophia_chat_icon', 'WesternEurope');
 
     if ($icon === 'none') {
         return '';
@@ -117,14 +146,12 @@ function sophia_chat_get_icon_url() {
     }
 
     // Return built-in icon URL
-    $icons = array(
-        'default' => SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/sophia-default.png',
-        'purple'  => SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/sophia-purple.png',
-        'blue'    => SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/sophia-blue.png',
-        'green'   => SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/sophia-green.png',
-    );
+    $icons = sophia_chat_get_icons();
+    if (isset($icons[$icon])) {
+        return SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/Sophias/Sophia_' . $icon . '.png';
+    }
 
-    return isset($icons[$icon]) ? $icons[$icon] : $icons['default'];
+    return SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/Sophias/Sophia_WesternEurope.png';
 }
 
 /**
@@ -213,32 +240,19 @@ function sophia_chat_settings_page() {
                     <th scope="row"><?php _e('Chat Icon', 'sophia-chat'); ?></th>
                     <td>
                         <fieldset>
-                            <?php $current_icon = get_option('sophia_chat_icon', 'default'); ?>
+                            <?php
+                            $current_icon = get_option('sophia_chat_icon', 'WesternEurope');
+                            $icons = sophia_chat_get_icons();
+                            ?>
 
                             <div class="sophia-icon-options">
+                                <?php foreach ($icons as $key => $label) : ?>
                                 <label class="sophia-icon-option">
-                                    <input type="radio" name="sophia_chat_icon" value="default" <?php checked($current_icon, 'default'); ?> />
-                                    <img src="<?php echo esc_url(SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/sophia-default.png'); ?>" alt="Default" width="48" height="48" />
-                                    <span><?php _e('Default', 'sophia-chat'); ?></span>
+                                    <input type="radio" name="sophia_chat_icon" value="<?php echo esc_attr($key); ?>" <?php checked($current_icon, $key); ?> />
+                                    <img src="<?php echo esc_url(SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/Sophias/Sophia_' . $key . '.png'); ?>" alt="<?php echo esc_attr($label); ?>" width="48" height="48" />
+                                    <span><?php echo esc_html($label); ?></span>
                                 </label>
-
-                                <label class="sophia-icon-option">
-                                    <input type="radio" name="sophia_chat_icon" value="purple" <?php checked($current_icon, 'purple'); ?> />
-                                    <img src="<?php echo esc_url(SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/sophia-purple.png'); ?>" alt="Purple" width="48" height="48" />
-                                    <span><?php _e('Purple', 'sophia-chat'); ?></span>
-                                </label>
-
-                                <label class="sophia-icon-option">
-                                    <input type="radio" name="sophia_chat_icon" value="blue" <?php checked($current_icon, 'blue'); ?> />
-                                    <img src="<?php echo esc_url(SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/sophia-blue.png'); ?>" alt="Blue" width="48" height="48" />
-                                    <span><?php _e('Blue', 'sophia-chat'); ?></span>
-                                </label>
-
-                                <label class="sophia-icon-option">
-                                    <input type="radio" name="sophia_chat_icon" value="green" <?php checked($current_icon, 'green'); ?> />
-                                    <img src="<?php echo esc_url(SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/sophia-green.png'); ?>" alt="Green" width="48" height="48" />
-                                    <span><?php _e('Green', 'sophia-chat'); ?></span>
-                                </label>
+                                <?php endforeach; ?>
 
                                 <label class="sophia-icon-option">
                                     <input type="radio" name="sophia_chat_icon" value="custom" <?php checked($current_icon, 'custom'); ?> />
