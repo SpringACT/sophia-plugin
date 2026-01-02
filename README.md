@@ -4,7 +4,7 @@ Add the Sophia Chat bubble to your website. Sophia provides real-time, accessibl
 
 ## Getting Started
 
-To add Sophia Chat to your website, you'll need an **Integration ID**. Contact [SpringACT](https://springact.org) to get one.
+Sophia Chat works out of the box with the default Chatbot ID. Simply install and choose your preferred Sophia icon.
 
 ---
 
@@ -32,7 +32,7 @@ WordPress is commonly used by NGOs, government agencies, and humanitarian organi
 2. In WordPress admin, go to **Plugins > Add New > Upload Plugin**
 3. Upload the `.zip` file and click **Install Now**
 4. Click **Activate**
-5. Go to **Settings > Sophia Chat** and enter your Integration ID
+5. Go to **Settings > Sophia Chat** and choose your preferred Sophia icon
 
 ### Option 2: Manual Installation
 
@@ -45,8 +45,7 @@ WordPress is commonly used by NGOs, government agencies, and humanitarian organi
 
 | Setting | Description |
 |---------|-------------|
-| **Integration ID** | Your unique Sophia Chat identifier (required) |
-| **Region** | Select US or EU based on your users' location |
+| **Chatbot ID** | The Sophia Chatbot ID (pre-filled with default) |
 | **Chat Icon** | Choose from 21 regional Sophia avatars or use a custom icon |
 | **Show Chat On** | All pages, homepage only, specific pages, or exclude pages |
 
@@ -57,25 +56,14 @@ WordPress is commonly used by NGOs, government agencies, and humanitarian organi
 For any website (including UN systems, custom government portals, or static sites), add this code before the closing `</body>` tag:
 
 ```html
+<!-- Chatbase Widget -->
 <script>
-  !function(e,n,t,r){
-    function o(){try{var e;if((e="string"==typeof this.response?JSON.parse(this.response):this.response).url){var t=n.getElementsByTagName("script")[0],r=n.createElement("script");r.async=!0,r.src=e.url,t.parentNode.insertBefore(r,t)}}catch(e){}}var s,p,a,i=[],c=[];e[t]={init:function(){s=arguments;var e={then:function(n){return c.push({type:"t",next:n}),e},catch:function(n){return c.push({type:"c",next:n}),e}};return e},on:function(){i.push(arguments)},render:function(){p=arguments},destroy:function(){a=!0}},e.__onWebMessengerHostReady__=function(n){if(a)n.destroy();else{for(var t=0;t<i.length;t++)n.on.apply(n,i[t]);for(t=0;t<c.length;t++){var r=c[t];"t"===r.type?n.then(r.next):n.catch(r.next)}p&&n.render.apply(n,p),n.init.apply(n,s)}},function(){var e=new XMLHttpRequest;e.addEventListener("load",o),e.open("GET","https://app.smooch.io/loader.json",!0),e.responseType="json",e.send()}()
-  }(window,document,"Smooch");
-
-  Smooch.init({
-    integrationId: 'YOUR_INTEGRATION_ID'
-  });
+  window.embeddedChatbotConfig = {
+    chatbotId: "Nq3vVo-7E8qgwlPRzAn9g",
+    domain: "www.chatbase.co"
+  }
 </script>
-```
-
-Replace `YOUR_INTEGRATION_ID` with the Integration ID provided by SpringACT.
-
-### EU Region
-
-If your users are primarily in Europe, change the loader URL:
-
-```javascript
-e.open("GET","https://app-eu-1.smooch.io/loader.json",!0)
+<script src="https://www.chatbase.co/embed.min.js" chatbotId="Nq3vVo-7E8qgwlPRzAn9g" domain="www.chatbase.co" defer></script>
 ```
 
 ---
@@ -197,16 +185,58 @@ Add to your theme's `main_template`:
 
 ## Custom Icon (Optional)
 
-To use a custom Sophia avatar, add the `businessIconUrl` option:
+To use a custom Sophia avatar on non-WordPress sites, add CSS to override the chat bubble icon:
 
-```javascript
-Smooch.init({
-  integrationId: 'YOUR_INTEGRATION_ID',
-  businessIconUrl: 'https://your-site.com/path/to/icon.png'
-});
+```html
+<!-- Chatbase Widget -->
+<script>
+  window.embeddedChatbotConfig = {
+    chatbotId: "Nq3vVo-7E8qgwlPRzAn9g",
+    domain: "www.chatbase.co"
+  }
+</script>
+<script src="https://www.chatbase.co/embed.min.js" chatbotId="Nq3vVo-7E8qgwlPRzAn9g" domain="www.chatbase.co" defer></script>
+
+<!-- Custom Sophia Icon -->
+<style>
+  #chatbase-bubble-button {
+    background-image: url('https://your-site.com/path/to/sophia-icon.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    border-radius: 50% !important;
+  }
+  #chatbase-bubble-button svg,
+  #chatbase-bubble-button img {
+    display: none !important;
+  }
+</style>
 ```
 
 Recommended icon size: 200x200 pixels, PNG format.
+
+### Available Sophia Icons
+
+You can use any of the regional Sophia icons from this repository:
+
+| Region | Icon URL |
+|--------|----------|
+| Western Europe | `assets/icons/Sophias/Sophia_WesternEurope.png` |
+| Central Europe | `assets/icons/Sophias/Sophia_CentralEurope.png` |
+| Southern Europe | `assets/icons/Sophias/Sophia_SouthernEurope.png` |
+| Eastern Europe | `assets/icons/Sophias/Sophia_EasternEurope.png` |
+| Middle East | `assets/icons/Sophias/Sophia_MiddleEast.png` |
+| Persian Region | `assets/icons/Sophias/Sophia_PersianRegion.png` |
+| Latin America | `assets/icons/Sophias/Sophia_LatinAmerica.png` |
+| East Africa | `assets/icons/Sophias/Sophia_EastAfrica.png` |
+| West Africa | `assets/icons/Sophias/Sophia_WestAfrica.png` |
+| East Asia | `assets/icons/Sophias/Sophia_EastAsia.png` |
+| South Asia | `assets/icons/Sophias/Sophia_SouthAsia.png` |
+| Southeast Asia | `assets/icons/Sophias/Sophia_SoutheastAsia.png` |
+| Asia Pacific | `assets/icons/Sophias/Sophia_AsiaPacific.png` |
+| Pacific Islands | `assets/icons/Sophias/Sophia_PacificIslands.png` |
+| Indigenous Contexts | `assets/icons/Sophias/Sophia_IndigenousContexts.png` |
+| Gender Inclusive | `assets/icons/Sophias/Sophia_GenderInclusive.png` |
+| Standard | `assets/icons/Sophias/Sophia_Standard.png` |
 
 ---
 

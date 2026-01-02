@@ -17,12 +17,13 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('SOPHIA_CHAT_VERSION', '1.0.0');
+define('SOPHIA_CHAT_VERSION', '2.0.0');
 define('SOPHIA_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SOPHIA_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('SOPHIA_CHAT_DEFAULT_AGENT_ID', 'Nq3vVo-7E8qgwlPRzAn9g');
 
 /**
- * Add the Sunshine Conversations chat widget to the footer
+ * Add the Chatbase chat widget to the footer
  */
 function sophia_chat_add_widget() {
     // Check if we should display on this page
@@ -30,33 +31,39 @@ function sophia_chat_add_widget() {
         return;
     }
 
-    $integration_id = get_option('sophia_chat_integration_id', '');
+    $chatbot_id = get_option('sophia_chat_chatbot_id', SOPHIA_CHAT_DEFAULT_AGENT_ID);
 
-    // Don't output anything if no integration ID is set
-    if (empty($integration_id)) {
+    // Don't output anything if no chatbot ID is set
+    if (empty($chatbot_id)) {
         return;
     }
 
-    $region = get_option('sophia_chat_region', 'app');
     $icon_url = sophia_chat_get_icon_url();
     ?>
+    <!-- Chatbase Widget -->
     <script>
-      !function(e,n,t,r){
-        function o(){try{var e;if((e="string"==typeof this.response?JSON.parse(this.response):this.response).url){var t=n.getElementsByTagName("script")[0],r=n.createElement("script");r.async=!0,r.src=e.url,t.parentNode.insertBefore(r,t)}}catch(e){}}var s,p,a,i=[],c=[];e[t]={init:function(){s=arguments;var e={then:function(n){return c.push({type:"t",next:n}),e},catch:function(n){return c.push({type:"c",next:n}),e}};return e},on:function(){i.push(arguments)},render:function(){p=arguments},destroy:function(){a=!0}},e.__onWebMessengerHostReady__=function(n){if(a)n.destroy();else{for(var t=0;t<i.length;t++)n.on.apply(n,i[t]);for(t=0;t<c.length;t++){var r=c[t];"t"===r.type?n.then(r.next):n.catch(r.next)}p&&n.render.apply(n,p),n.init.apply(n,s)}},function(){var e=new XMLHttpRequest;e.addEventListener("load",o),e.open("GET","https://<?php echo esc_js($region); ?>.smooch.io/loader.json",!0),e.responseType="json",e.send()}()
-      }(window,document,"Smooch");
-
-      Smooch.init({
-        integrationId: '<?php echo esc_js($integration_id); ?>',
-        <?php if ($icon_url) : ?>
-        customColors: {
-          brandColor: '65758e',
-        },
-        businessIconUrl: '<?php echo esc_js($icon_url); ?>',
-        <?php endif; ?>
-      }).then(function() {
-        console.log('Sophia Chat initialized');
-      });
+      window.embeddedChatbotConfig = {
+        chatbotId: "<?php echo esc_js($chatbot_id); ?>",
+        domain: "www.chatbase.co"
+      }
     </script>
+    <script src="https://www.chatbase.co/embed.min.js" chatbotId="<?php echo esc_attr($chatbot_id); ?>" domain="www.chatbase.co" defer></script>
+
+    <?php if ($icon_url) : ?>
+    <!-- Custom Sophia Icon Override -->
+    <style>
+      #chatbase-bubble-button {
+        background-image: url('<?php echo esc_url($icon_url); ?>') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        border-radius: 50% !important;
+      }
+      #chatbase-bubble-button svg,
+      #chatbase-bubble-button img {
+        display: none !important;
+      }
+    </style>
+    <?php endif; ?>
     <?php
 }
 add_action('wp_footer', 'sophia_chat_add_widget');
@@ -172,8 +179,7 @@ add_action('admin_menu', 'sophia_chat_menu');
  * Register plugin settings
  */
 function sophia_chat_register_settings() {
-    register_setting('sophia_chat_options', 'sophia_chat_integration_id', 'sanitize_text_field');
-    register_setting('sophia_chat_options', 'sophia_chat_region', 'sanitize_text_field');
+    register_setting('sophia_chat_options', 'sophia_chat_chatbot_id', 'sanitize_text_field');
     register_setting('sophia_chat_options', 'sophia_chat_icon', 'sanitize_text_field');
     register_setting('sophia_chat_options', 'sophia_chat_custom_icon_url', 'esc_url_raw');
     register_setting('sophia_chat_options', 'sophia_chat_visibility', 'sanitize_text_field');
@@ -205,33 +211,19 @@ function sophia_chat_settings_page() {
             <?php settings_fields('sophia_chat_options'); ?>
 
             <table class="form-table">
-                <!-- Integration ID -->
+                <!-- Chatbot ID -->
                 <tr>
                     <th scope="row">
-                        <label for="sophia_chat_integration_id"><?php _e('Integration ID', 'sophia-chat'); ?></label>
+                        <label for="sophia_chat_chatbot_id"><?php _e('Chatbot ID', 'sophia-chat'); ?></label>
                     </th>
                     <td>
                         <input type="text"
-                               id="sophia_chat_integration_id"
-                               name="sophia_chat_integration_id"
-                               value="<?php echo esc_attr(get_option('sophia_chat_integration_id')); ?>"
+                               id="sophia_chat_chatbot_id"
+                               name="sophia_chat_chatbot_id"
+                               value="<?php echo esc_attr(get_option('sophia_chat_chatbot_id', SOPHIA_CHAT_DEFAULT_AGENT_ID)); ?>"
                                class="regular-text"
-                               required />
-                        <p class="description"><?php _e('Your Sophia Chat Integration ID. Contact SpringACT if you don\'t have one.', 'sophia-chat'); ?></p>
-                    </td>
-                </tr>
-
-                <!-- Region -->
-                <tr>
-                    <th scope="row">
-                        <label for="sophia_chat_region"><?php _e('Region', 'sophia-chat'); ?></label>
-                    </th>
-                    <td>
-                        <select id="sophia_chat_region" name="sophia_chat_region">
-                            <option value="app" <?php selected(get_option('sophia_chat_region'), 'app'); ?>><?php _e('US (Default)', 'sophia-chat'); ?></option>
-                            <option value="app-eu-1" <?php selected(get_option('sophia_chat_region'), 'app-eu-1'); ?>><?php _e('EU', 'sophia-chat'); ?></option>
-                        </select>
-                        <p class="description"><?php _e('Select the region closest to your users.', 'sophia-chat'); ?></p>
+                               placeholder="<?php echo esc_attr(SOPHIA_CHAT_DEFAULT_AGENT_ID); ?>" />
+                        <p class="description"><?php _e('The Sophia Chatbot ID. Leave as default unless instructed otherwise by SpringACT.', 'sophia-chat'); ?></p>
                     </td>
                 </tr>
 
