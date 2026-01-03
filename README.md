@@ -45,7 +45,7 @@ WordPress is commonly used by NGOs, government agencies, and humanitarian organi
 
 | Setting | Description |
 |---------|-------------|
-| **Chat Icon** | Choose from 21 Sophia avatars or use a custom icon |
+| **Chat Icon** | Choose from 19 Sophia avatars or use a custom icon |
 | **Show Chat On** | All pages, homepage only, specific pages, or exclude pages |
 
 ---
@@ -221,7 +221,6 @@ Pick an icon URL from the table below and use it in the [Direct HTML/JavaScript]
 | Icon | URL (copy this) |
 |------|-----------------|
 | 1 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_1.png` |
-| 2 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_2.png` |
 | 3 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_3.png` |
 | 4 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_4.png` |
 | 5 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_5.png` |
@@ -238,7 +237,6 @@ Pick an icon URL from the table below and use it in the [Direct HTML/JavaScript]
 | 16 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_16.png` |
 | 17 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_17.png` |
 | 18 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_18.png` |
-| 19 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_19.png` |
 | 20 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_20.png` |
 | 21 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_21.png` |
 
