@@ -157,11 +157,6 @@
       border-radius: 50%;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     }
-    .modal-content p {
-      margin: 15px 0 0;
-      color: #65758e;
-      font-weight: 600;
-    }
     .modal-hint {
       margin-top: 8px;
       font-size: 12px;
@@ -204,8 +199,7 @@
   <div class="modal-overlay" id="iconModal" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
       <img id="modalImg" src="" alt="Sophia Icon">
-      <p id="modalLabel">Sophia 1</p>
-      <p class="modal-hint">Click outside to close</p>
+      <p class="modal-hint">Click outside the box to close</p>
     </div>
   </div>
 
@@ -302,7 +296,6 @@
     function magnifyIcon(key, event) {
       event.stopPropagation();
       document.getElementById('modalImg').src = getIconUrl(key);
-      document.getElementById('modalLabel').textContent = `Sophia ${key}`;
       document.getElementById('iconModal').classList.add('active');
     }
 
