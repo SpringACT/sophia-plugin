@@ -120,12 +120,8 @@ function sophia_chat_get_icons() {
     return array(
         '1'  => __('Sophia 1', 'sophia-chat'),
         '2'  => __('Sophia 2', 'sophia-chat'),
-        '3'  => __('Sophia 3', 'sophia-chat'),
-        '4'  => __('Sophia 4', 'sophia-chat'),
-        '5'  => __('Sophia 5', 'sophia-chat'),
         '6'  => __('Sophia 6', 'sophia-chat'),
         '7'  => __('Sophia 7', 'sophia-chat'),
-        '8'  => __('Sophia 8', 'sophia-chat'),
         '9'  => __('Sophia 9', 'sophia-chat'),
         '10' => __('Sophia 10', 'sophia-chat'),
         '11' => __('Sophia 11', 'sophia-chat'),
@@ -136,9 +132,12 @@ function sophia_chat_get_icons() {
         '16' => __('Sophia 16', 'sophia-chat'),
         '17' => __('Sophia 17', 'sophia-chat'),
         '18' => __('Sophia 18', 'sophia-chat'),
-        '19' => __('Sophia 19', 'sophia-chat'),
         '20' => __('Sophia 20', 'sophia-chat'),
         '21' => __('Sophia 21', 'sophia-chat'),
+        '22' => __('Sophia 22', 'sophia-chat'),
+        '23' => __('Sophia 23', 'sophia-chat'),
+        '24' => __('Sophia 24', 'sophia-chat'),
+        '25' => __('Sophia 25', 'sophia-chat'),
     );
 }
 

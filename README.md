@@ -45,7 +45,7 @@ WordPress is commonly used by NGOs, government agencies, and humanitarian organi
 
 | Setting | Description |
 |---------|-------------|
-| **Chat Icon** | Choose from 19 Sophia avatars or use a custom icon |
+| **Chat Icon** | Choose from 20 Sophia avatars or use a custom icon |
 | **Show Chat On** | All pages, homepage only, specific pages, or exclude pages |
 
 ---
@@ -221,12 +221,9 @@ Pick an icon URL from the table below and use it in the [Direct HTML/JavaScript]
 | Icon | URL (copy this) |
 |------|-----------------|
 | 1 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_1.png` |
-| 3 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_3.png` |
-| 4 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_4.png` |
-| 5 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_5.png` |
+| 2 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_2.png` |
 | 6 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_6.png` |
 | 7 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_7.png` |
-| 8 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_8.png` |
 | 9 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_9.png` |
 | 10 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_10.png` |
 | 11 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_11.png` |
@@ -239,6 +236,10 @@ Pick an icon URL from the table below and use it in the [Direct HTML/JavaScript]
 | 18 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_18.png` |
 | 20 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_20.png` |
 | 21 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_21.png` |
+| 22 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_22.png` |
+| 23 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_23.png` |
+| 24 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_24.png` |
+| 25 | `https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_25.png` |
 
 ---
 
