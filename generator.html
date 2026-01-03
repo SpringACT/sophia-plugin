@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sophia Chat Code Generator</title>
-  <link rel="icon" type="image/png" href="assets/icons/Sophias/Sophia_1.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_1.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_1.png">
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/Sophia_1.png">
   <style>
     * {
       box-sizing: border-box;
@@ -120,6 +122,51 @@
     footer a {
       color: #65758e;
     }
+    /* Modal for magnified icon */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      max-width: 90%;
+      animation: modalZoom 0.2s ease;
+    }
+    @keyframes modalZoom {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .modal-content img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    .modal-content p {
+      margin: 15px 0 0;
+      color: #65758e;
+      font-weight: 600;
+    }
+    .modal-hint {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #999;
+    }
   </style>
 </head>
 <body>
@@ -153,6 +200,15 @@
     </p>
   </footer>
 
+  <!-- Modal for magnified icon view -->
+  <div class="modal-overlay" id="iconModal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <img id="modalImg" src="" alt="Sophia Icon">
+      <p id="modalLabel">Sophia 1</p>
+      <p class="modal-hint">Click outside to close</p>
+    </div>
+  </div>
+
   <script>
     const icons = [
       { key: '1' },
@@ -169,9 +225,9 @@
       { key: '16' },
       { key: '17' },
       { key: '18' },
+      { key: '19' },
       { key: '20' },
       { key: '21' },
-      { key: '22' },
       { key: '23' },
       { key: '24' },
       { key: '25' }
@@ -243,13 +299,29 @@
       });
     }
 
+    function magnifyIcon(key, event) {
+      event.stopPropagation();
+      document.getElementById('modalImg').src = getIconUrl(key);
+      document.getElementById('modalLabel').textContent = `Sophia ${key}`;
+      document.getElementById('iconModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('iconModal').classList.remove('active');
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
     // Initialize
     const grid = document.getElementById('iconGrid');
     icons.forEach(icon => {
       const div = document.createElement('div');
       div.className = 'icon-option' + (icon.key === selectedIcon ? ' selected' : '');
       div.dataset.key = icon.key;
-      div.innerHTML = `<img src="${getIconUrl(icon.key)}" alt="Sophia ${icon.key}">`;
+      div.innerHTML = `<img src="${getIconUrl(icon.key)}" alt="Sophia ${icon.key}" onclick="magnifyIcon('${icon.key}', event)">`;
       div.onclick = () => selectIcon(icon.key);
       grid.appendChild(div);
     });
