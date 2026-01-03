@@ -296,6 +296,7 @@
 
     function magnifyIcon(key, event) {
       event.stopPropagation();
+      selectIcon(key); // Also select the icon when magnifying
       document.getElementById('modalImg').src = getIconUrl(key);
       document.getElementById('iconModal').classList.add('active');
     }
