@@ -342,24 +342,33 @@ function sophia_chat_settings_page() {
     </div>
 
     <script>
-    jQuery(document).ready(function($) {
+    document.addEventListener('DOMContentLoaded', function() {
+        var iconRadios = document.querySelectorAll('input[name="sophia_chat_icon"]');
+        var customUrlField = document.querySelector('.sophia-custom-icon-url');
+        var visibilitySelect = document.getElementById('sophia_chat_visibility');
+        var pageIdsField = document.querySelector('.sophia-page-ids');
+        var excludeIdsField = document.querySelector('.sophia-exclude-ids');
+
         // Show/hide custom icon URL field
-        $('input[name="sophia_chat_icon"]').on('change', function() {
-            if ($(this).val() === 'custom') {
-                $('.sophia-custom-icon-url').show();
-            } else {
-                $('.sophia-custom-icon-url').hide();
-            }
+        iconRadios.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                if (this.value === 'custom') {
+                    customUrlField.style.display = '';
+                } else {
+                    customUrlField.style.display = 'none';
+                }
+            });
         });
 
         // Show/hide page ID fields based on visibility selection
-        $('#sophia_chat_visibility').on('change', function() {
-            var val = $(this).val();
-            $('.sophia-page-ids, .sophia-exclude-ids').hide();
+        visibilitySelect.addEventListener('change', function() {
+            var val = this.value;
+            pageIdsField.style.display = 'none';
+            excludeIdsField.style.display = 'none';
             if (val === 'specific') {
-                $('.sophia-page-ids').show();
+                pageIdsField.style.display = '';
             } else if (val === 'exclude') {
-                $('.sophia-exclude-ids').show();
+                excludeIdsField.style.display = '';
             }
         });
     });
