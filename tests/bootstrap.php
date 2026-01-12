@@ -164,6 +164,12 @@ if (!function_exists('register_setting')) {
     }
 }
 
+if (!function_exists('wp_add_privacy_policy_content')) {
+    function wp_add_privacy_policy_content($plugin_name, $policy_text) {
+        // No-op for testing
+    }
+}
+
 // Reset test state
 function sophia_test_reset() {
     $GLOBALS['sophia_test_options'] = array();

@@ -549,3 +549,39 @@ function sophia_chat_log_deactivation() {
     update_option('sophia_chat_audit_log', $log, false);
 }
 register_deactivation_hook(__FILE__, 'sophia_chat_log_deactivation');
+
+/**
+ * Adds suggested privacy policy content for GDPR compliance.
+ *
+ * Registers privacy policy text with WordPress's privacy policy tools.
+ * Site owners can review and add this to their privacy policy page.
+ *
+ * @since 2.3.0
+ *
+ * @return void
+ */
+function sophia_chat_privacy_policy_content() {
+    if (!function_exists('wp_add_privacy_policy_content')) {
+        return;
+    }
+
+    $content = sprintf(
+        '<h2>%s</h2>
+        <p>%s</p>
+        <ul>
+            <li>%s</li>
+            <li>%s</li>
+            <li>%s</li>
+        </ul>
+        <p>%s</p>',
+        __('Sophia Chat Widget', 'sophia-chat'),
+        __('This website uses the Sophia Chat widget to provide support resources for individuals affected by domestic violence. When you use the chat widget:', 'sophia-chat'),
+        __('Your conversation takes place on sophia.chat, not on this website', 'sophia-chat'),
+        __('No personal data from chat interactions is stored on this website', 'sophia-chat'),
+        __('Chat conversations are handled according to sophia.chat\'s privacy practices', 'sophia-chat'),
+        __('For information about how your chat data is handled, please review the privacy policy at sophia.chat.', 'sophia-chat')
+    );
+
+    wp_add_privacy_policy_content('Sophia Chat', $content);
+}
+add_action('admin_init', 'sophia_chat_privacy_policy_content');
