@@ -42,7 +42,14 @@ function sophia_chat_enqueue_styles() {
 add_action('wp_enqueue_scripts', 'sophia_chat_enqueue_styles');
 
 /**
- * Add the Sophia Chat bubble to the footer
+ * Renders the Sophia Chat bubble widget in the site footer.
+ *
+ * Outputs the HTML, inline CSS, and onclick handler for the chat bubble.
+ * Only renders if sophia_chat_should_display() returns true.
+ *
+ * @since 1.0.0
+ *
+ * @return void
  */
 function sophia_chat_add_widget() {
     if (!sophia_chat_should_display()) {
@@ -68,7 +75,14 @@ function sophia_chat_add_widget() {
 add_action('wp_footer', 'sophia_chat_add_widget');
 
 /**
- * Check if chat should display on current page
+ * Determines whether the chat widget should display on the current page.
+ *
+ * Checks the visibility setting and compares against the current page context.
+ * Supports four modes: 'all', 'homepage', 'specific', and 'exclude'.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if widget should display, false otherwise.
  */
 function sophia_chat_should_display() {
     $visibility = get_option('sophia_chat_visibility', 'all');
@@ -109,7 +123,13 @@ function sophia_chat_should_display() {
 }
 
 /**
- * Get available Sophia icons
+ * Returns the list of available Sophia avatar icons.
+ *
+ * Each icon is keyed by its numeric ID and has a translatable label.
+ *
+ * @since 1.0.0
+ *
+ * @return array Associative array of icon_id => label pairs.
  */
 function sophia_chat_get_icons() {
     return array(
@@ -137,7 +157,14 @@ function sophia_chat_get_icons() {
 }
 
 /**
- * Get the selected icon URL
+ * Returns the URL for the currently selected chat icon.
+ *
+ * Handles three cases: 'none' (empty), 'custom' (user-provided URL),
+ * or a built-in icon ID. Falls back to Sophia_1.png for invalid keys.
+ *
+ * @since 1.0.0
+ *
+ * @return string The icon URL, or empty string if 'none' selected.
  */
 function sophia_chat_get_icon_url() {
     $icon = get_option('sophia_chat_icon', '1');
@@ -160,7 +187,13 @@ function sophia_chat_get_icon_url() {
 }
 
 /**
- * Add settings page to admin menu
+ * Registers the Sophia Chat settings page in the WordPress admin menu.
+ *
+ * Adds a submenu page under Settings > Sophia Chat.
+ *
+ * @since 1.0.0
+ *
+ * @return void
  */
 function sophia_chat_menu() {
     add_options_page(
@@ -174,7 +207,13 @@ function sophia_chat_menu() {
 add_action('admin_menu', 'sophia_chat_menu');
 
 /**
- * Register plugin settings
+ * Registers plugin settings with the WordPress Settings API.
+ *
+ * Registers icon, custom URL, visibility, page IDs, and exclude IDs options.
+ *
+ * @since 1.0.0
+ *
+ * @return void
  */
 function sophia_chat_register_settings() {
     register_setting('sophia_chat_options', 'sophia_chat_icon', 'sanitize_text_field');
@@ -186,7 +225,14 @@ function sophia_chat_register_settings() {
 add_action('admin_init', 'sophia_chat_register_settings');
 
 /**
- * Enqueue admin styles
+ * Enqueues admin stylesheet for the settings page.
+ *
+ * Only loads on the Sophia Chat settings page to avoid conflicts.
+ *
+ * @since 1.0.0
+ *
+ * @param string $hook The current admin page hook suffix.
+ * @return void
  */
 function sophia_chat_admin_styles($hook) {
     if ($hook !== 'settings_page_sophia-chat') {
@@ -197,7 +243,14 @@ function sophia_chat_admin_styles($hook) {
 add_action('admin_enqueue_scripts', 'sophia_chat_admin_styles');
 
 /**
- * Settings page HTML
+ * Renders the plugin settings page HTML.
+ *
+ * Displays icon selector, visibility options, and page ID inputs.
+ * Includes inline JavaScript for show/hide field interactions.
+ *
+ * @since 1.0.0
+ *
+ * @return void
  */
 function sophia_chat_settings_page() {
     ?>
@@ -315,7 +368,12 @@ function sophia_chat_settings_page() {
 }
 
 /**
- * Add settings link on plugins page
+ * Adds a 'Settings' link to the plugin row on the Plugins page.
+ *
+ * @since 1.0.0
+ *
+ * @param array $links Existing plugin action links.
+ * @return array Modified links array with Settings link prepended.
  */
 function sophia_chat_settings_link($links) {
     $settings_link = '<a href="options-general.php?page=sophia-chat">' . __('Settings', 'sophia-chat') . '</a>';
@@ -325,7 +383,17 @@ function sophia_chat_settings_link($links) {
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'sophia_chat_settings_link');
 
 /**
- * Log settings changes for audit trail
+ * Logs settings changes to the audit trail.
+ *
+ * Records option name, old value, new value, timestamp, and user ID.
+ * Only logs changes to sophia_chat_* options. Keeps last 100 entries.
+ *
+ * @since 2.1.0
+ *
+ * @param string $option_name Name of the option being updated.
+ * @param mixed  $old_value   Previous option value.
+ * @param mixed  $new_value   New option value.
+ * @return void
  */
 function sophia_chat_log_change($option_name, $old_value, $new_value) {
     if (strpos($option_name, 'sophia_chat_') !== 0) {
@@ -356,7 +424,16 @@ function sophia_chat_log_change($option_name, $old_value, $new_value) {
 add_action('updated_option', 'sophia_chat_log_change', 10, 3);
 
 /**
- * Log when a new option is added
+ * Logs when a new sophia_chat_* option is added.
+ *
+ * Records option name, value, timestamp, and user ID to audit log.
+ * Skips logging for the audit log option itself to prevent recursion.
+ *
+ * @since 2.1.0
+ *
+ * @param string $option_name Name of the option being added.
+ * @param mixed  $value       The option value.
+ * @return void
  */
 function sophia_chat_log_add($option_name, $value) {
     if (strpos($option_name, 'sophia_chat_') !== 0) {
@@ -386,7 +463,13 @@ function sophia_chat_log_add($option_name, $value) {
 add_action('added_option', 'sophia_chat_log_add', 10, 2);
 
 /**
- * Log plugin activation
+ * Logs plugin activation to the audit trail.
+ *
+ * Records timestamp and user ID when the plugin is activated.
+ *
+ * @since 2.1.0
+ *
+ * @return void
  */
 function sophia_chat_log_activation() {
     $log = get_option('sophia_chat_audit_log', array());
@@ -404,7 +487,13 @@ function sophia_chat_log_activation() {
 register_activation_hook(__FILE__, 'sophia_chat_log_activation');
 
 /**
- * Log plugin deactivation
+ * Logs plugin deactivation to the audit trail.
+ *
+ * Records timestamp and user ID when the plugin is deactivated.
+ *
+ * @since 2.1.0
+ *
+ * @return void
  */
 function sophia_chat_log_deactivation() {
     $log = get_option('sophia_chat_audit_log', array());
