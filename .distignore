@@ -15,3 +15,6 @@ dist/
 
 # Documentation (optional - keep README for users)
 generator.html
+CLAUDE.md
+claude.md
+README.md
