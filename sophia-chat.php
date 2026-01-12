@@ -29,7 +29,7 @@ define('SOPHIA_CHAT_ICON_CDN', 'https://cdn.jsdelivr.net/gh/SpringACT/sophia-plu
  * Allows configuration via SOPHIA_CHAT_CUSTOM_URL constant in wp-config.php
  * for self-hosted deployments. Falls back to default sophia.chat URL.
  *
- * @since 2.3.0
+ * @since 2.0.0
  *
  * @return string The chat service URL.
  */
@@ -615,7 +615,7 @@ register_deactivation_hook(__FILE__, 'sophia_chat_log_deactivation');
  * Registers privacy policy text with WordPress's privacy policy tools.
  * Site owners can review and add this to their privacy policy page.
  *
- * @since 2.3.0
+ * @since 2.0.0
  *
  * @return void
  */

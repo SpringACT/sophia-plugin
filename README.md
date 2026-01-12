@@ -56,7 +56,6 @@ WordPress is commonly used by NGOs, government agencies, and humanitarian organi
 
 | Setting | Description |
 |---------|-------------|
-| **License Key** | Your Sophia license key (format: `SOPHIA-XXXX-XXXX-XXXX`) |
 | **Chat Icon** | Choose from 20 Sophia avatars or use a custom icon |
 | **Show Chat On** | All pages, homepage only, specific pages, or exclude pages |
 

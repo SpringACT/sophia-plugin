@@ -19,6 +19,10 @@
     var fallbackUrl = button.getAttribute('data-fallback-url') || chatUrl;
 
     function openChat() {
+        var width = 400;
+        var height = 600;
+        var left = (screen.width - width) / 2;
+        var top = (screen.height - height) / 2;
         var popup = window.open(
             chatUrl,
             'SophiaChat',
