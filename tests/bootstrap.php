@@ -116,6 +116,54 @@ if (!function_exists('get_current_user_id')) {
     }
 }
 
+if (!function_exists('_e')) {
+    function _e($text, $domain = 'default') {
+        echo $text;
+    }
+}
+
+if (!function_exists('esc_attr_e')) {
+    function esc_attr_e($text, $domain = 'default') {
+        echo htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+    }
+}
+
+if (!function_exists('esc_url')) {
+    function esc_url($url) {
+        return filter_var($url, FILTER_SANITIZE_URL);
+    }
+}
+
+if (!function_exists('wp_enqueue_style')) {
+    function wp_enqueue_style($handle, $src = '', $deps = array(), $ver = false, $media = 'all') {
+        // No-op for testing
+    }
+}
+
+if (!function_exists('wp_enqueue_script')) {
+    function wp_enqueue_script($handle, $src = '', $deps = array(), $ver = false, $args = array()) {
+        // No-op for testing
+    }
+}
+
+if (!function_exists('wp_add_inline_style')) {
+    function wp_add_inline_style($handle, $data) {
+        // No-op for testing
+    }
+}
+
+if (!function_exists('add_options_page')) {
+    function add_options_page($page_title, $menu_title, $capability, $menu_slug, $callback = '', $position = null) {
+        // No-op for testing
+    }
+}
+
+if (!function_exists('register_setting')) {
+    function register_setting($option_group, $option_name, $args = array()) {
+        // No-op for testing
+    }
+}
+
 // Reset test state
 function sophia_test_reset() {
     $GLOBALS['sophia_test_options'] = array();
