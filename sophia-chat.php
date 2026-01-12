@@ -20,8 +20,33 @@ if (!defined('ABSPATH')) {
 define('SOPHIA_CHAT_VERSION', '1.0.3');
 define('SOPHIA_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SOPHIA_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('SOPHIA_CHAT_URL', 'https://sophia.chat/secure-chat');
 define('SOPHIA_CHAT_ICON_CDN', 'https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/');
+
+/**
+ * Returns the chat service URL.
+ *
+ * Allows configuration via SOPHIA_CHAT_CUSTOM_URL constant in wp-config.php
+ * for self-hosted deployments. Falls back to default sophia.chat URL.
+ *
+ * @since 2.3.0
+ *
+ * @return string The chat service URL.
+ */
+function sophia_chat_get_chat_url() {
+    if (defined('SOPHIA_CHAT_CUSTOM_URL') && filter_var(SOPHIA_CHAT_CUSTOM_URL, FILTER_VALIDATE_URL)) {
+        $url = SOPHIA_CHAT_CUSTOM_URL;
+        // Ensure HTTPS for security
+        if (strpos($url, 'https://') === 0) {
+            return $url;
+        }
+    }
+    return 'https://sophia.chat/secure-chat';
+}
+
+// Backwards compatibility: define constant for third-party code
+if (!defined('SOPHIA_CHAT_URL')) {
+    define('SOPHIA_CHAT_URL', sophia_chat_get_chat_url());
+}
 
 /**
  * Enqueue frontend styles for the chat widget
@@ -96,7 +121,7 @@ function sophia_chat_add_widget() {
         return;
     }
 
-    $chat_url = SOPHIA_CHAT_URL;
+    $chat_url = sophia_chat_get_chat_url();
     $icon_url = sophia_chat_get_icon_url();
     ?>
     <!-- Sophia Chat Widget -->
@@ -382,24 +407,38 @@ function sophia_chat_settings_page() {
     </div>
 
     <script>
-    jQuery(document).ready(function($) {
+    document.addEventListener('DOMContentLoaded', function() {
+        var iconRadios = document.querySelectorAll('input[name="sophia_chat_icon"]');
+        var customUrlField = document.querySelector('.sophia-custom-icon-url');
+        var visibilitySelect = document.getElementById('sophia_chat_visibility');
+        var pageIdsField = document.querySelector('.sophia-page-ids');
+        var excludeIdsField = document.querySelector('.sophia-exclude-ids');
+
+        // Guard against missing elements
+        if (!visibilitySelect || !customUrlField || !pageIdsField || !excludeIdsField) {
+            return;
+        }
+
         // Show/hide custom icon URL field
-        $('input[name="sophia_chat_icon"]').on('change', function() {
-            if ($(this).val() === 'custom') {
-                $('.sophia-custom-icon-url').show();
-            } else {
-                $('.sophia-custom-icon-url').hide();
-            }
+        iconRadios.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                if (this.value === 'custom') {
+                    customUrlField.style.display = '';
+                } else {
+                    customUrlField.style.display = 'none';
+                }
+            });
         });
 
         // Show/hide page ID fields based on visibility selection
-        $('#sophia_chat_visibility').on('change', function() {
-            var val = $(this).val();
-            $('.sophia-page-ids, .sophia-exclude-ids').hide();
+        visibilitySelect.addEventListener('change', function() {
+            var val = this.value;
+            pageIdsField.style.display = 'none';
+            excludeIdsField.style.display = 'none';
             if (val === 'specific') {
-                $('.sophia-page-ids').show();
+                pageIdsField.style.display = '';
             } else if (val === 'exclude') {
-                $('.sophia-exclude-ids').show();
+                excludeIdsField.style.display = '';
             }
         });
     });
@@ -428,7 +467,7 @@ add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'sophia_chat_sett
  * Records option name, old value, new value, timestamp, and user ID.
  * Only logs changes to sophia_chat_* options. Keeps last 100 entries.
  *
- * @since 2.1.0
+ * @since 2.0.0
  *
  * @param string $option_name Name of the option being updated.
  * @param mixed  $old_value   Previous option value.
@@ -469,7 +508,7 @@ add_action('updated_option', 'sophia_chat_log_change', 10, 3);
  * Records option name, value, timestamp, and user ID to audit log.
  * Skips logging for the audit log option itself to prevent recursion.
  *
- * @since 2.1.0
+ * @since 2.0.0
  *
  * @param string $option_name Name of the option being added.
  * @param mixed  $value       The option value.
@@ -507,7 +546,7 @@ add_action('added_option', 'sophia_chat_log_add', 10, 2);
  *
  * Records timestamp and user ID when the plugin is activated.
  *
- * @since 2.1.0
+ * @since 2.0.0
  *
  * @return void
  */
@@ -531,7 +570,7 @@ register_activation_hook(__FILE__, 'sophia_chat_log_activation');
  *
  * Records timestamp and user ID when the plugin is deactivated.
  *
- * @since 2.1.0
+ * @since 2.0.0
  *
  * @return void
  */

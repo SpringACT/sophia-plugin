@@ -17,18 +17,6 @@
     }
 
     function openChat() {
-        // On mobile, open in new tab to preserve user's place on site
-        if (window.innerWidth < 768) {
-            window.open(chatUrl, '_blank');
-            return;
-        }
-
-        // Calculate responsive popup size
-        var width = Math.min(400, window.innerWidth - 40);
-        var height = Math.min(600, window.innerHeight - 40);
-        var left = (window.innerWidth - width) / 2;
-        var top = (window.innerHeight - height) / 2;
-
         var popup = window.open(
             chatUrl,
             'SophiaChat',
@@ -42,4 +30,12 @@
     }
 
     button.addEventListener('click', openChat);
+
+    // Ensure Enter and Space keys work (native button behavior, but explicit for clarity)
+    button.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openChat();
+        }
+    });
 })();
