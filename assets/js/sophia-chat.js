@@ -20,7 +20,7 @@
         var popup = window.open(
             chatUrl,
             'SophiaChat',
-            'width=400,height=600,scrollbars=yes,resizable=yes'
+            'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top + ',scrollbars=yes,resizable=yes'
         );
 
         // Fallback: if popup blocked, navigate directly
