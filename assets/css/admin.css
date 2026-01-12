@@ -37,6 +37,17 @@
     pointer-events: none;
 }
 
+.sophia-icon-option input[type="radio"]:focus + img,
+.sophia-icon-option input[type="radio"]:focus + .sophia-custom-icon-placeholder {
+    outline: 2px solid #2271b1;
+    outline-offset: 2px;
+}
+
+.sophia-icon-option input[type="radio"]:focus:not(:focus-visible) + img,
+.sophia-icon-option input[type="radio"]:focus:not(:focus-visible) + .sophia-custom-icon-placeholder {
+    outline: none;
+}
+
 .sophia-icon-option input[type="radio"]:checked + img,
 .sophia-icon-option input[type="radio"]:checked + .sophia-custom-icon-placeholder {
     box-shadow: 0 0 0 3px #2271b1;

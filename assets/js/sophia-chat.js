@@ -16,16 +16,26 @@
         return;
     }
 
-    button.addEventListener('click', function() {
+    function openChat() {
         var popup = window.open(
             chatUrl,
             'SophiaChat',
-            'width=400,height=600,scrollbars=yes,resizable=yes'
+            'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top + ',scrollbars=yes,resizable=yes'
         );
 
         // Fallback: if popup blocked, navigate directly
         if (!popup || popup.closed) {
             window.location.href = chatUrl;
+        }
+    }
+
+    button.addEventListener('click', openChat);
+
+    // Ensure Enter and Space keys work (native button behavior, but explicit for clarity)
+    button.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openChat();
         }
     });
 })();

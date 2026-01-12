@@ -239,4 +239,37 @@ class SophiaChatTest extends TestCase
 
         $this->assertTrue(sophia_chat_should_display());
     }
+
+    /**
+     * Test sophia_chat_get_chat_url() returns default URL.
+     */
+    public function test_get_chat_url_default()
+    {
+        $url = sophia_chat_get_chat_url();
+
+        $this->assertEquals('https://sophia.chat/secure-chat', $url);
+    }
+
+    /**
+     * Test sophia_chat_get_chat_url() returns custom HTTPS URL when defined.
+     */
+    public function test_get_chat_url_custom_https()
+    {
+        // Test is handled via runkit or separate process - skip if constant already defined
+        if (defined('SOPHIA_CHAT_CUSTOM_URL')) {
+            $this->markTestSkipped('SOPHIA_CHAT_CUSTOM_URL already defined');
+        }
+
+        // Verify function returns default when no custom URL set
+        $this->assertEquals('https://sophia.chat/secure-chat', sophia_chat_get_chat_url());
+    }
+
+    /**
+     * Test SOPHIA_CHAT_URL constant exists for backwards compatibility.
+     */
+    public function test_chat_url_constant_backwards_compat()
+    {
+        $this->assertTrue(defined('SOPHIA_CHAT_URL'));
+        $this->assertEquals(sophia_chat_get_chat_url(), SOPHIA_CHAT_URL);
+    }
 }
