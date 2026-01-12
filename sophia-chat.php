@@ -43,6 +43,11 @@ function sophia_chat_get_chat_url() {
     return 'https://sophia.chat/secure-chat';
 }
 
+// Backwards compatibility: define constant for third-party code
+if (!defined('SOPHIA_CHAT_URL')) {
+    define('SOPHIA_CHAT_URL', sophia_chat_get_chat_url());
+}
+
 /**
  * Enqueue frontend styles for the chat widget
  */
