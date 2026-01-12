@@ -35,7 +35,7 @@ function sophia_chat_enqueue_styles() {
 
     $icon_url = sophia_chat_get_icon_url();
     if ($icon_url) {
-        $inline_css = '#sophia-chat-bubble { background-image: url(' . esc_url($icon_url) . '); }';
+        $inline_css = '#sophia-chat-bubble { background-image: url("' . esc_url($icon_url) . '"); }';
         wp_add_inline_style('sophia-chat', $inline_css);
     }
 }
