@@ -3,7 +3,7 @@
  * Plugin Name: Sophia Chat
  * Plugin URI: https://github.com/SpringACT/sophia-plugin
  * Description: Adds the Sophia Chat bubble to your website - providing real-time, accessible, anonymous support for individuals affected by domestic violence.
- * Version: 2.1.0
+ * Version: 1.0.3
  * Author: SpringACT
  * Author URI: https://springact.org
  * License: GPL v2 or later
@@ -17,10 +17,29 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('SOPHIA_CHAT_VERSION', '2.1.0');
+define('SOPHIA_CHAT_VERSION', '1.0.3');
 define('SOPHIA_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SOPHIA_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('SOPHIA_CHAT_URL', 'https://sophia.chat/secure-chat');
+define('SOPHIA_CHAT_ICON_CDN', 'https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/');
+
+/**
+ * Enqueue frontend styles for the chat widget
+ */
+function sophia_chat_enqueue_styles() {
+    if (!sophia_chat_should_display()) {
+        return;
+    }
+
+    wp_enqueue_style('sophia-chat', SOPHIA_CHAT_PLUGIN_URL . 'assets/css/sophia-chat.css', array(), SOPHIA_CHAT_VERSION);
+
+    $icon_url = sophia_chat_get_icon_url();
+    if ($icon_url) {
+        $inline_css = '#sophia-chat-bubble { background-image: url("' . esc_url($icon_url) . '"); }';
+        wp_add_inline_style('sophia-chat', $inline_css);
+    }
+}
+add_action('wp_enqueue_scripts', 'sophia_chat_enqueue_styles');
 
 /**
  * Renders the Sophia Chat bubble widget in the site footer.
@@ -33,48 +52,24 @@ define('SOPHIA_CHAT_URL', 'https://sophia.chat/secure-chat');
  * @return void
  */
 function sophia_chat_add_widget() {
-    // Check if we should display on this page
     if (!sophia_chat_should_display()) {
         return;
     }
 
-    $icon_url = sophia_chat_get_icon_url();
     $chat_url = SOPHIA_CHAT_URL;
+    $icon_url = sophia_chat_get_icon_url();
     ?>
     <!-- Sophia Chat Widget -->
-    <style>
-      #sophia-chat-bubble {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        z-index: 999999;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        background-color: #65758e;
-        background-size: cover;
-        background-position: center;
-        border: none;
-        padding: 0;
-      }
-      #sophia-chat-bubble:hover {
-        transform: scale(1.1);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-      }
-      <?php if ($icon_url) : ?>
-      #sophia-chat-bubble {
-        background-image: url('<?php echo esc_url($icon_url); ?>');
-      }
-      <?php endif; ?>
-    </style>
     <button id="sophia-chat-bubble"
-            onclick="window.open('<?php echo esc_url($chat_url); ?>', 'SophiaChat', 'width=400,height=600,scrollbars=yes,resizable=yes')"
+            onclick="(function(){var w=window.open('<?php echo esc_js($chat_url); ?>','SophiaChat','width=400,height=600,scrollbars=yes,resizable=yes');if(!w||w.closed)window.location.href='<?php echo esc_js($chat_url); ?>';})()"
             aria-label="<?php esc_attr_e('Chat with Sophia', 'sophia-chat'); ?>"
             title="<?php esc_attr_e('Chat with Sophia', 'sophia-chat'); ?>">
     </button>
+    <?php if ($icon_url) : ?>
+    <script>
+    (function(){var img=new Image();img.onerror=function(){var b=document.getElementById('sophia-chat-bubble');if(b){b.style.backgroundImage='none';b.textContent='?';}};img.src='<?php echo esc_js($icon_url); ?>';})();
+    </script>
+    <?php endif; ?>
     <?php
 }
 add_action('wp_footer', 'sophia_chat_add_widget');
@@ -182,13 +177,13 @@ function sophia_chat_get_icon_url() {
         return get_option('sophia_chat_custom_icon_url', '');
     }
 
-    // Return built-in icon URL
+    // Return built-in icon URL from CDN
     $icons = sophia_chat_get_icons();
     if (isset($icons[$icon])) {
-        return SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/Sophias/Sophia_' . $icon . '.png';
+        return SOPHIA_CHAT_ICON_CDN . 'Sophia_' . $icon . '.png';
     }
 
-    return SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/Sophias/Sophia_1.png';
+    return SOPHIA_CHAT_ICON_CDN . 'Sophia_1.png';
 }
 
 /**
@@ -280,7 +275,7 @@ function sophia_chat_settings_page() {
                                 <?php foreach ($icons as $key => $label) : ?>
                                 <label class="sophia-icon-option">
                                     <input type="radio" name="sophia_chat_icon" value="<?php echo esc_attr($key); ?>" <?php checked($current_icon, $key); ?> />
-                                    <img src="<?php echo esc_url(SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/Sophias/Sophia_' . $key . '.png'); ?>" alt="<?php echo esc_attr($label); ?>" width="48" height="48" />
+                                    <img src="<?php echo esc_url(SOPHIA_CHAT_ICON_CDN . 'Sophia_' . $key . '.png'); ?>" alt="<?php echo esc_attr($label); ?>" width="48" height="48" onerror="this.onerror=null;this.style.background='#65758e';this.alt='<?php echo esc_attr($label); ?> (unavailable)'" />
                                     <span><?php echo esc_html($label); ?></span>
                                 </label>
                                 <?php endforeach; ?>
