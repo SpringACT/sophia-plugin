@@ -316,7 +316,13 @@
       const div = document.createElement('div');
       div.className = 'icon-option' + (icon.key === selectedIcon ? ' selected' : '');
       div.dataset.key = icon.key;
-      div.innerHTML = `<img src="${getIconUrl(icon.key)}" alt="Sophia ${icon.key}" onclick="magnifyIcon('${icon.key}', event)">`;
+
+      const img = document.createElement('img');
+      img.src = getIconUrl(icon.key);
+      img.alt = 'Sophia ' + icon.key;
+      img.addEventListener('click', (event) => magnifyIcon(icon.key, event));
+      div.appendChild(img);
+
       div.onclick = () => selectIcon(icon.key);
       grid.appendChild(div);
     });
