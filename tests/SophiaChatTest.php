@@ -239,4 +239,14 @@ class SophiaChatTest extends TestCase
 
         $this->assertTrue(sophia_chat_should_display());
     }
+
+    /**
+     * Test sophia_chat_get_chat_url() returns default URL.
+     */
+    public function test_get_chat_url_default()
+    {
+        $url = sophia_chat_get_chat_url();
+
+        $this->assertEquals('https://sophia.chat/secure-chat', $url);
+    }
 }

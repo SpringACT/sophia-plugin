@@ -20,8 +20,28 @@ if (!defined('ABSPATH')) {
 define('SOPHIA_CHAT_VERSION', '1.0.3');
 define('SOPHIA_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SOPHIA_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('SOPHIA_CHAT_URL', 'https://sophia.chat/secure-chat');
 define('SOPHIA_CHAT_ICON_CDN', 'https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/');
+
+/**
+ * Returns the chat service URL.
+ *
+ * Allows configuration via SOPHIA_CHAT_CUSTOM_URL constant in wp-config.php
+ * for self-hosted deployments. Falls back to default sophia.chat URL.
+ *
+ * @since 2.3.0
+ *
+ * @return string The chat service URL.
+ */
+function sophia_chat_get_chat_url() {
+    if (defined('SOPHIA_CHAT_CUSTOM_URL') && filter_var(SOPHIA_CHAT_CUSTOM_URL, FILTER_VALIDATE_URL)) {
+        $url = SOPHIA_CHAT_CUSTOM_URL;
+        // Ensure HTTPS for security
+        if (strpos($url, 'https://') === 0) {
+            return $url;
+        }
+    }
+    return 'https://sophia.chat/secure-chat';
+}
 
 /**
  * Enqueue frontend styles for the chat widget
@@ -96,7 +116,7 @@ function sophia_chat_add_widget() {
         return;
     }
 
-    $chat_url = SOPHIA_CHAT_URL;
+    $chat_url = sophia_chat_get_chat_url();
     $icon_url = sophia_chat_get_icon_url();
     ?>
     <!-- Sophia Chat Widget -->
