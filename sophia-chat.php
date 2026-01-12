@@ -388,7 +388,7 @@ add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'sophia_chat_sett
  * Records option name, old value, new value, timestamp, and user ID.
  * Only logs changes to sophia_chat_* options. Keeps last 100 entries.
  *
- * @since 2.1.0
+ * @since 2.0.0
  *
  * @param string $option_name Name of the option being updated.
  * @param mixed  $old_value   Previous option value.
@@ -429,7 +429,7 @@ add_action('updated_option', 'sophia_chat_log_change', 10, 3);
  * Records option name, value, timestamp, and user ID to audit log.
  * Skips logging for the audit log option itself to prevent recursion.
  *
- * @since 2.1.0
+ * @since 2.0.0
  *
  * @param string $option_name Name of the option being added.
  * @param mixed  $value       The option value.
@@ -467,7 +467,7 @@ add_action('added_option', 'sophia_chat_log_add', 10, 2);
  *
  * Records timestamp and user ID when the plugin is activated.
  *
- * @since 2.1.0
+ * @since 2.0.0
  *
  * @return void
  */
@@ -491,7 +491,7 @@ register_activation_hook(__FILE__, 'sophia_chat_log_activation');
  *
  * Records timestamp and user ID when the plugin is deactivated.
  *
- * @since 2.1.0
+ * @since 2.0.0
  *
  * @return void
  */
