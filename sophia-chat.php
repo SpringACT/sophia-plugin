@@ -123,10 +123,12 @@ function sophia_chat_add_widget() {
 
     $chat_url = sophia_chat_get_chat_url();
     $icon_url = sophia_chat_get_icon_url();
+    $fallback_url = get_option('sophia_chat_fallback_url', '');
     ?>
     <!-- Sophia Chat Widget -->
     <button id="sophia-chat-bubble"
             data-chat-url="<?php echo esc_url($chat_url); ?>"
+            <?php if ($fallback_url) : ?>data-fallback-url="<?php echo esc_url($fallback_url); ?>"<?php endif; ?>
             aria-label="<?php esc_attr_e('Chat with Sophia', 'sophia-chat'); ?>"
             title="<?php esc_attr_e('Chat with Sophia', 'sophia-chat'); ?>">
     </button>
@@ -286,6 +288,7 @@ function sophia_chat_register_settings() {
     register_setting('sophia_chat_options', 'sophia_chat_visibility', 'sanitize_text_field');
     register_setting('sophia_chat_options', 'sophia_chat_page_ids', 'sanitize_text_field');
     register_setting('sophia_chat_options', 'sophia_chat_exclude_ids', 'sanitize_text_field');
+    register_setting('sophia_chat_options', 'sophia_chat_fallback_url', 'esc_url_raw');
 }
 add_action('admin_init', 'sophia_chat_register_settings');
 
@@ -398,6 +401,22 @@ function sophia_chat_settings_page() {
                                    placeholder="1, 42, 156" />
                             <p class="description"><?php _e('Enter page/post IDs to exclude, separated by commas.', 'sophia-chat'); ?></p>
                         </div>
+                    </td>
+                </tr>
+
+                <!-- Fallback URL -->
+                <tr>
+                    <th scope="row">
+                        <label for="sophia_chat_fallback_url"><?php _e('Fallback Resources URL', 'sophia-chat'); ?></label>
+                    </th>
+                    <td>
+                        <input type="url"
+                               id="sophia_chat_fallback_url"
+                               name="sophia_chat_fallback_url"
+                               value="<?php echo esc_url(get_option('sophia_chat_fallback_url')); ?>"
+                               class="regular-text"
+                               placeholder="https://example.com/support-resources" />
+                        <p class="description"><?php _e('Optional: URL to alternative support resources if the chat popup is blocked. Leave empty to redirect to the chat URL directly.', 'sophia-chat'); ?></p>
                     </td>
                 </tr>
             </table>

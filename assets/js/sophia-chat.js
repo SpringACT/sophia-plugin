@@ -16,6 +16,8 @@
         return;
     }
 
+    var fallbackUrl = button.getAttribute('data-fallback-url') || chatUrl;
+
     function openChat() {
         var popup = window.open(
             chatUrl,
@@ -23,9 +25,9 @@
             'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top + ',scrollbars=yes,resizable=yes'
         );
 
-        // Fallback: if popup blocked, navigate directly
+        // Fallback: if popup blocked, navigate to fallback URL (or chat URL if not set)
         if (!popup || popup.closed) {
-            window.location.href = chatUrl;
+            window.location.href = fallbackUrl;
         }
     }
 
