@@ -4,7 +4,16 @@ Add the Sophia Chat bubble to your website. Sophia provides real-time, accessibl
 
 ## Getting Started
 
-Sophia Chat works out of the box with the default Chatbot ID. Simply install and choose your preferred Sophia icon.
+### Prerequisites: License Key
+
+Before installing Sophia Chat, you need to obtain a license key from SpringACT. The license key ensures that only authorized organizations can deploy the Sophia Chat widget.
+
+**To request a license key:**
+1. Contact [SpringACT](https://springact.org/contact) to request a license
+2. Provide your organization details and website domain(s)
+3. You will receive a license key in the format: `SOPHIA-XXXX-XXXX-XXXX`
+
+Your license key is tied to your domain(s) and is required for the widget to function.
 
 ---
 
@@ -32,14 +41,16 @@ WordPress is commonly used by NGOs, government agencies, and humanitarian organi
 2. In WordPress admin, go to **Plugins > Add New > Upload Plugin**
 3. Upload the `.zip` file and click **Install Now**
 4. Click **Activate**
-5. Go to **Settings > Sophia Chat** and choose your preferred Sophia icon
+5. Go to **Settings > Sophia Chat**
+6. Enter your license key
+7. Choose your preferred Sophia icon
 
 ### Option 2: Manual Installation
 
 1. Download or clone this repository
 2. Upload the `sophia-plugin` folder to `/wp-content/plugins/`
 3. Activate **Sophia Chat** in the Plugins menu
-4. Configure in **Settings > Sophia Chat**
+4. Go to **Settings > Sophia Chat**, enter your license key, and configure
 
 ### WordPress Settings
 
@@ -52,7 +63,9 @@ WordPress is commonly used by NGOs, government agencies, and humanitarian organi
 
 ## Direct HTML/JavaScript
 
-For any website (including UN systems, custom government portals, or static sites), add this code before the closing `</body>` tag:
+For any website (including UN systems, custom government portals, or static sites), use our **[Code Generator](https://springact.github.io/sophia-plugin/generator.html)** to get ready-to-use code with your license key and icon selection.
+
+Alternatively, add this code before the closing `</body>` tag:
 
 ```html
 <!-- Sophia Chat Widget -->
@@ -81,13 +94,16 @@ For any website (including UN systems, custom government portals, or static site
   }
 </style>
 <button id="sophia-chat-bubble"
-        onclick="window.open('https://sophia.chat/secure-chat', 'SophiaChat', 'width=400,height=600,scrollbars=yes,resizable=yes')"
+        data-license="YOUR-LICENSE-KEY"
+        onclick="window.open('https://sophia.chat/secure-chat?license=YOUR-LICENSE-KEY', 'SophiaChat', 'width=400,height=600,scrollbars=yes,resizable=yes')"
         aria-label="Chat with Sophia"
         title="Chat with Sophia">
 </button>
 ```
 
-Replace `ICON_URL_HERE` with your chosen Sophia icon URL from the table below.
+Replace:
+- `ICON_URL_HERE` with your chosen Sophia icon URL from the table below
+- `YOUR-LICENSE-KEY` with your license key (e.g., `SOPHIA-XXXX-XXXX-XXXX`)
 
 ---
 
@@ -208,13 +224,16 @@ Add to your theme's `main_template`:
 
 ## Choosing a Sophia Icon
 
-### Easy Way: Code Generator
+### Recommended: Code Generator
 
-Use our **[Code Generator](https://springact.github.io/sophia-plugin/generator.html)** to select your Sophia icon and get ready-to-use code.
+Use our **[Code Generator](https://springact.github.io/sophia-plugin/generator.html)** to:
+1. Select your Sophia icon
+2. Enter your license key
+3. Get ready-to-use code
 
 ### Manual Way
 
-Pick an icon URL from the table below and use it in the [Direct HTML/JavaScript](#direct-htmljavascript) code above.
+Pick an icon URL from the table below and use it in the [Direct HTML/JavaScript](#direct-htmljavascript) code above. Don't forget to add your license key!
 
 ### Available Sophia Icons
 

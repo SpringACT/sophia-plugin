@@ -163,11 +163,43 @@
       font-size: 12px;
       color: #999;
     }
+    .license-input {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 18px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .license-input:focus {
+      outline: none;
+      border-color: #65758e;
+    }
+    .license-input.valid {
+      border-color: #28a745;
+    }
+    .license-input.invalid {
+      border-color: #dc3545;
+    }
+    .license-info {
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .license-info a {
+      color: #65758e;
+    }
+    .license-format {
+      font-size: 12px;
+      color: #999;
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
   <h1>Sophia Chat Code Generator</h1>
-  <p class="subtitle">Select your Sophia icon and copy the code to add to your website</p>
+  <p class="subtitle">Select your Sophia icon, enter your license key, and copy the code to add to your website</p>
 
   <div class="step">
     <h2>Step 1: Choose Your Sophia Icon</h2>
@@ -175,13 +207,20 @@
   </div>
 
   <div class="step">
-    <h2>Step 2: Copy Your Code</h2>
+    <h2>Step 2: Enter Your License Key</h2>
+    <p class="license-info">Enter the license key you received from SpringACT. <a href="https://springact.org/contact" target="_blank">Contact us</a> to request a license.</p>
+    <input type="text" id="licenseKey" class="license-input" placeholder="SOPHIA-XXXX-XXXX-XXXX" maxlength="22">
+    <p class="license-format">Format: SOPHIA-XXXX-XXXX-XXXX</p>
+  </div>
+
+  <div class="step">
+    <h2>Step 3: Copy Your Code</h2>
     <div class="code-output" id="codeOutput"></div>
-    <button class="copy-btn" id="copyBtn" onclick="copyCode()">Copy Code</button>
+    <button class="copy-btn" id="copyBtn">Copy Code</button>
   </div>
 
   <div class="instructions">
-    <h3>Step 3: Add to Your Website</h3>
+    <h3>Step 4: Add to Your Website</h3>
     <ol>
       <li>Copy the code above</li>
       <li>Paste it just before the <code>&lt;/body&gt;</code> tag in your HTML</li>
@@ -237,8 +276,19 @@
       return `${baseIconUrl}${key}.png`;
     }
 
+    function getLicenseKey() {
+      return document.getElementById('licenseKey').value.trim().toUpperCase();
+    }
+
+    function isValidLicenseFormat(key) {
+      return /^SOPHIA-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(key);
+    }
+
     function generateCode(iconKey) {
       const iconUrl = getIconUrl(iconKey);
+      const license = getLicenseKey();
+      const chatUrlWithLicense = license ? `${chatUrl}?license=${encodeURIComponent(license)}` : chatUrl;
+      const dataLicenseAttr = license ? `\n        data-license="${license}"` : '';
       return `<!-- Sophia Chat Widget -->
 <style>
   #sophia-chat-bubble {
@@ -264,11 +314,17 @@
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   }
 </style>
-<button id="sophia-chat-bubble"
-        onclick="window.open('${chatUrl}', 'SophiaChat', 'width=400,height=600,scrollbars=yes,resizable=yes')"
+<button id="sophia-chat-bubble"${dataLicenseAttr}
+        onclick="window.open('${chatUrlWithLicense}', 'SophiaChat', 'width=400,height=600,scrollbars=yes,resizable=yes')"
         aria-label="Chat with Sophia"
         title="Chat with Sophia">
 </button>`;
+    }
+
+    function updateCodeOutput() {
+      document.getElementById('codeOutput').textContent = generateCode(selectedIcon);
+      document.getElementById('copyBtn').textContent = 'Copy Code';
+      document.getElementById('copyBtn').classList.remove('copied');
     }
 
     function selectIcon(key) {
@@ -276,9 +332,21 @@
       document.querySelectorAll('.icon-option').forEach(el => {
         el.classList.toggle('selected', el.dataset.key === key);
       });
-      document.getElementById('codeOutput').textContent = generateCode(key);
-      document.getElementById('copyBtn').textContent = 'Copy Code';
-      document.getElementById('copyBtn').classList.remove('copied');
+      updateCodeOutput();
+    }
+
+    function updateLicenseValidation() {
+      const input = document.getElementById('licenseKey');
+      const value = input.value.trim().toUpperCase();
+      input.classList.remove('valid', 'invalid');
+      if (value.length > 0) {
+        if (isValidLicenseFormat(value)) {
+          input.classList.add('valid');
+        } else if (value.length === 22) {
+          input.classList.add('invalid');
+        }
+      }
+      updateCodeOutput();
     }
 
     function copyCode() {
@@ -296,7 +364,7 @@
 
     function magnifyIcon(key, event) {
       event.stopPropagation();
-      selectIcon(key); // Also select the icon when magnifying
+      selectIcon(key);
       document.getElementById('modalImg').src = getIconUrl(key);
       document.getElementById('iconModal').classList.add('active');
     }
@@ -326,6 +394,12 @@
       div.addEventListener('click', () => selectIcon(icon.key));
       grid.appendChild(div);
     });
+
+    // License key input listener
+    document.getElementById('licenseKey').addEventListener('input', updateLicenseValidation);
+
+    // Copy button listener
+    document.getElementById('copyBtn').addEventListener('click', copyCode);
 
     document.getElementById('codeOutput').textContent = generateCode(selectedIcon);
   </script>
