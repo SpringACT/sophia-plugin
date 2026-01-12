@@ -323,7 +323,7 @@
       img.addEventListener('click', (event) => magnifyIcon(icon.key, event));
       div.appendChild(img);
 
-      div.onclick = () => selectIcon(icon.key);
+      div.addEventListener('click', () => selectIcon(icon.key));
       grid.appendChild(div);
     });
 
