@@ -53,7 +53,7 @@ function sophia_chat_add_widget() {
     ?>
     <!-- Sophia Chat Widget -->
     <button id="sophia-chat-bubble"
-            onclick="window.open('<?php echo esc_url($chat_url); ?>', 'SophiaChat', 'width=400,height=600,scrollbars=yes,resizable=yes')"
+            onclick="(function(){var w=window.open('<?php echo esc_js($chat_url); ?>','SophiaChat','width=400,height=600,scrollbars=yes,resizable=yes');if(!w||w.closed)window.location.href='<?php echo esc_js($chat_url); ?>';})()"
             aria-label="<?php esc_attr_e('Chat with Sophia', 'sophia-chat'); ?>"
             title="<?php esc_attr_e('Chat with Sophia', 'sophia-chat'); ?>">
     </button>
@@ -216,7 +216,7 @@ function sophia_chat_settings_page() {
                                 <?php foreach ($icons as $key => $label) : ?>
                                 <label class="sophia-icon-option">
                                     <input type="radio" name="sophia_chat_icon" value="<?php echo esc_attr($key); ?>" <?php checked($current_icon, $key); ?> />
-                                    <img src="<?php echo esc_url(SOPHIA_CHAT_ICON_CDN . 'Sophia_' . $key . '.png'); ?>" alt="<?php echo esc_attr($label); ?>" width="48" height="48" />
+                                    <img src="<?php echo esc_url(SOPHIA_CHAT_ICON_CDN . 'Sophia_' . $key . '.png'); ?>" alt="<?php echo esc_attr($label); ?>" width="48" height="48" onerror="this.style.background='#65758e';this.alt='<?php echo esc_attr($label); ?> (unavailable)'" />
                                     <span><?php echo esc_html($label); ?></span>
                                 </label>
                                 <?php endforeach; ?>
