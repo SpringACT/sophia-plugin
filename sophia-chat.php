@@ -21,6 +21,7 @@ define('SOPHIA_CHAT_VERSION', '1.0.3');
 define('SOPHIA_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SOPHIA_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('SOPHIA_CHAT_URL', 'https://sophia.chat/secure-chat');
+define('SOPHIA_CHAT_ICON_CDN', 'https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/');
 
 /**
  * Add the Sophia Chat bubble to the footer
@@ -155,13 +156,13 @@ function sophia_chat_get_icon_url() {
         return get_option('sophia_chat_custom_icon_url', '');
     }
 
-    // Return built-in icon URL
+    // Return built-in icon URL from CDN
     $icons = sophia_chat_get_icons();
     if (isset($icons[$icon])) {
-        return SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/Sophias/Sophia_' . $icon . '.png';
+        return SOPHIA_CHAT_ICON_CDN . 'Sophia_' . $icon . '.png';
     }
 
-    return SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/Sophias/Sophia_1.png';
+    return SOPHIA_CHAT_ICON_CDN . 'Sophia_1.png';
 }
 
 /**
@@ -227,7 +228,7 @@ function sophia_chat_settings_page() {
                                 <?php foreach ($icons as $key => $label) : ?>
                                 <label class="sophia-icon-option">
                                     <input type="radio" name="sophia_chat_icon" value="<?php echo esc_attr($key); ?>" <?php checked($current_icon, $key); ?> />
-                                    <img src="<?php echo esc_url(SOPHIA_CHAT_PLUGIN_URL . 'assets/icons/Sophias/Sophia_' . $key . '.png'); ?>" alt="<?php echo esc_attr($label); ?>" width="48" height="48" />
+                                    <img src="<?php echo esc_url(SOPHIA_CHAT_ICON_CDN . 'Sophia_' . $key . '.png'); ?>" alt="<?php echo esc_attr($label); ?>" width="48" height="48" />
                                     <span><?php echo esc_html($label); ?></span>
                                 </label>
                                 <?php endforeach; ?>

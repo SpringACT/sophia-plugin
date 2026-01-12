@@ -1,0 +1,17 @@
+# Distribution ignore file
+# Files/folders listed here are excluded from plugin zip distribution
+
+# Icons are served via CDN
+assets/icons/
+
+# Development files
+.git/
+.github/
+.distignore
+.gitignore
+
+# Distribution folder
+dist/
+
+# Documentation (optional - keep README for users)
+generator.html
