@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/SpringACT/sophia-plugin
  * Description: Adds the Sophia Chat bubble to your website - providing real-time, accessible, anonymous support for individuals affected by domestic violence.
  * Version: 2.0.0
- * Author: SpringACT
+ * Author: Spring ACT
  * Author URI: https://springact.org
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html

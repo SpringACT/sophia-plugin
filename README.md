@@ -6,10 +6,10 @@ Add the Sophia Chat bubble to your website. Sophia provides real-time, accessibl
 
 ### Prerequisites: License Key
 
-Before installing Sophia Chat, you need to obtain a license key from SpringACT. The license key ensures that only authorized organizations can deploy the Sophia Chat widget.
+Before installing Sophia Chat, you need to obtain a license key from Spring ACT. The license key ensures that only authorized organizations can deploy the Sophia Chat widget.
 
 **To request a license key:**
-1. Contact [SpringACT](https://springact.org/contact) to request a license
+1. Contact [Spring ACT](https://springact.org/contact) to request a license
 2. Provide your organization details and website domain(s)
 3. You will receive a license key in the format: `SOPHIA-XXXX-XXXX-XXXX`
 
@@ -267,7 +267,7 @@ Pick an icon URL from the table below and use it in the [Direct HTML/JavaScript]
 If your platform isn't listed or you need assistance with integration:
 
 - **Issues:** [GitHub Issues](https://github.com/SpringACT/sophia-plugin/issues)
-- **Contact:** [SpringACT](https://springact.org)
+- **Contact:** [Spring ACT](https://springact.org)
 
 ## License
 
