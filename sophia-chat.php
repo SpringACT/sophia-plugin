@@ -328,3 +328,100 @@ function sophia_chat_settings_link($links) {
     return $links;
 }
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'sophia_chat_settings_link');
+
+/**
+ * Log settings changes for audit trail
+ */
+function sophia_chat_log_change($option_name, $old_value, $new_value) {
+    if (strpos($option_name, 'sophia_chat_') !== 0) {
+        return;
+    }
+
+    if ($old_value === $new_value) {
+        return;
+    }
+
+    $log = get_option('sophia_chat_audit_log', array());
+
+    $log[] = array(
+        'timestamp' => current_time('mysql'),
+        'user_id'   => get_current_user_id(),
+        'option'    => $option_name,
+        'old_value' => $old_value,
+        'new_value' => $new_value,
+    );
+
+    // Keep only the last 100 entries
+    if (count($log) > 100) {
+        $log = array_slice($log, -100);
+    }
+
+    update_option('sophia_chat_audit_log', $log, false);
+}
+add_action('updated_option', 'sophia_chat_log_change', 10, 3);
+
+/**
+ * Log when a new option is added
+ */
+function sophia_chat_log_add($option_name, $value) {
+    if (strpos($option_name, 'sophia_chat_') !== 0) {
+        return;
+    }
+
+    if ($option_name === 'sophia_chat_audit_log') {
+        return;
+    }
+
+    $log = get_option('sophia_chat_audit_log', array());
+
+    $log[] = array(
+        'timestamp' => current_time('mysql'),
+        'user_id'   => get_current_user_id(),
+        'option'    => $option_name,
+        'old_value' => null,
+        'new_value' => $value,
+    );
+
+    if (count($log) > 100) {
+        $log = array_slice($log, -100);
+    }
+
+    update_option('sophia_chat_audit_log', $log, false);
+}
+add_action('added_option', 'sophia_chat_log_add', 10, 2);
+
+/**
+ * Log plugin activation
+ */
+function sophia_chat_log_activation() {
+    $log = get_option('sophia_chat_audit_log', array());
+
+    $log[] = array(
+        'timestamp' => current_time('mysql'),
+        'user_id'   => get_current_user_id(),
+        'option'    => 'plugin_status',
+        'old_value' => 'inactive',
+        'new_value' => 'active',
+    );
+
+    update_option('sophia_chat_audit_log', $log, false);
+}
+register_activation_hook(__FILE__, 'sophia_chat_log_activation');
+
+/**
+ * Log plugin deactivation
+ */
+function sophia_chat_log_deactivation() {
+    $log = get_option('sophia_chat_audit_log', array());
+
+    $log[] = array(
+        'timestamp' => current_time('mysql'),
+        'user_id'   => get_current_user_id(),
+        'option'    => 'plugin_status',
+        'old_value' => 'active',
+        'new_value' => 'inactive',
+    );
+
+    update_option('sophia_chat_audit_log', $log, false);
+}
+register_deactivation_hook(__FILE__, 'sophia_chat_log_deactivation');
