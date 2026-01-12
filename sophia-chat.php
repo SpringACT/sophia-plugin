@@ -24,46 +24,34 @@ define('SOPHIA_CHAT_URL', 'https://sophia.chat/secure-chat');
 define('SOPHIA_CHAT_ICON_CDN', 'https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/');
 
 /**
- * Add the Sophia Chat bubble to the footer
+ * Enqueue frontend styles for the chat widget
  */
-function sophia_chat_add_widget() {
-    // Check if we should display on this page
+function sophia_chat_enqueue_styles() {
     if (!sophia_chat_should_display()) {
         return;
     }
 
+    wp_enqueue_style('sophia-chat', SOPHIA_CHAT_PLUGIN_URL . 'assets/css/sophia-chat.css', array(), SOPHIA_CHAT_VERSION);
+
     $icon_url = sophia_chat_get_icon_url();
+    if ($icon_url) {
+        $inline_css = '#sophia-chat-bubble { background-image: url(' . esc_url($icon_url) . '); }';
+        wp_add_inline_style('sophia-chat', $inline_css);
+    }
+}
+add_action('wp_enqueue_scripts', 'sophia_chat_enqueue_styles');
+
+/**
+ * Add the Sophia Chat bubble to the footer
+ */
+function sophia_chat_add_widget() {
+    if (!sophia_chat_should_display()) {
+        return;
+    }
+
     $chat_url = SOPHIA_CHAT_URL;
     ?>
     <!-- Sophia Chat Widget -->
-    <style>
-      #sophia-chat-bubble {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        z-index: 999999;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        background-color: #65758e;
-        background-size: cover;
-        background-position: center;
-        border: none;
-        padding: 0;
-      }
-      #sophia-chat-bubble:hover {
-        transform: scale(1.1);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-      }
-      <?php if ($icon_url) : ?>
-      #sophia-chat-bubble {
-        background-image: url('<?php echo esc_url($icon_url); ?>');
-      }
-      <?php endif; ?>
-    </style>
     <button id="sophia-chat-bubble"
             onclick="window.open('<?php echo esc_url($chat_url); ?>', 'SophiaChat', 'width=400,height=600,scrollbars=yes,resizable=yes')"
             aria-label="<?php esc_attr_e('Chat with Sophia', 'sophia-chat'); ?>"
