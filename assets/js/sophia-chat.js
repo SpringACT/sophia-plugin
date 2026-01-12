@@ -16,7 +16,7 @@
         return;
     }
 
-    button.addEventListener('click', function() {
+    function openChat() {
         var popup = window.open(
             chatUrl,
             'SophiaChat',
@@ -26,6 +26,16 @@
         // Fallback: if popup blocked, navigate directly
         if (!popup || popup.closed) {
             window.location.href = chatUrl;
+        }
+    }
+
+    button.addEventListener('click', openChat);
+
+    // Ensure Enter and Space keys work (native button behavior, but explicit for clarity)
+    button.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openChat();
         }
     });
 })();
