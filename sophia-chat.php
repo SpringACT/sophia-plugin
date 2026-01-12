@@ -50,6 +50,7 @@ function sophia_chat_add_widget() {
     }
 
     $chat_url = SOPHIA_CHAT_URL;
+    $icon_url = sophia_chat_get_icon_url();
     ?>
     <!-- Sophia Chat Widget -->
     <button id="sophia-chat-bubble"
@@ -57,6 +58,11 @@ function sophia_chat_add_widget() {
             aria-label="<?php esc_attr_e('Chat with Sophia', 'sophia-chat'); ?>"
             title="<?php esc_attr_e('Chat with Sophia', 'sophia-chat'); ?>">
     </button>
+    <?php if ($icon_url) : ?>
+    <script>
+    (function(){var img=new Image();img.onerror=function(){var b=document.getElementById('sophia-chat-bubble');if(b){b.style.backgroundImage='none';b.textContent='?';}};img.src='<?php echo esc_js($icon_url); ?>';})();
+    </script>
+    <?php endif; ?>
     <?php
 }
 add_action('wp_footer', 'sophia_chat_add_widget');
