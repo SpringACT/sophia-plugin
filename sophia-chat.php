@@ -21,7 +21,7 @@ define('SOPHIA_CHAT_VERSION', '1.0.3');
 define('SOPHIA_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SOPHIA_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('SOPHIA_CHAT_URL', 'https://sophia.chat/secure-chat');
-define('SOPHIA_CHAT_ICON_CDN', 'https://raw.githubusercontent.com/SpringACT/sophia-plugin/main/assets/icons/Sophias/');
+define('SOPHIA_CHAT_ICON_CDN', 'https://cdn.jsdelivr.net/gh/SpringACT/sophia-plugin@main/assets/icons/Sophias/');
 
 /**
  * Enqueue frontend styles for the chat widget
