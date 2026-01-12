@@ -17,9 +17,9 @@
     }
 
     function openChat() {
-        // On mobile, navigate directly for better UX
+        // On mobile, open in new tab to preserve user's place on site
         if (window.innerWidth < 768) {
-            window.location.href = chatUrl;
+            window.open(chatUrl, '_blank');
             return;
         }
 
